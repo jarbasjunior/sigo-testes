@@ -29,15 +29,16 @@ public class PageInicial extends PageObjectGeneric<PageInicial> {
 		botaoContato.click();
 	}
 	
-	public void irParaPaginaInicial(){
+	public void abaPaginaInicial(){
 		Log.info("Direcionando para página inicial...");
 		aguardarElementoVisivel(abaPaginaInicial);
 		abaPaginaInicial.click();
 	}
 
 	public void irParaCalculoDescontos(){
-		Log.info("Direcionando para página de cálculo de descontos...");
+		Log.info("Direcionando para lista de produtos...");
 		aguardarElementoVisivel(botaoCalcularDesconto);
+		botaoCalcularDesconto.click();
 		botaoCalcularDesconto.click();
 	}
 }

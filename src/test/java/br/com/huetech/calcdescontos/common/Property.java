@@ -28,6 +28,11 @@ public abstract class Property {
 	public static final String TIPO_MSG_DUVIDA;
 	public static final String TIPO_MSG_SUGESTAO;
 	public static final String TIPO_MSG_RECLAMACAO;
+	public static final String MSG_001;
+	public static final String MSG_002;
+	public static final String MSG_003;
+	public static final String MSG_004;
+	public static final String ID_PRODUTO;
 	
 	private static final String PROPERTIES_FILE = "br/com/huetech/calcdescontos/config.properties";
 	
@@ -50,6 +55,11 @@ public abstract class Property {
 		TIPO_MSG_DUVIDA	    = get("mensagem.duvida");
 		TIPO_MSG_SUGESTAO   = get("mensagem.sugestao");
 		TIPO_MSG_RECLAMACAO = get("mensagem.reclamacao");
+		MSG_001 			= get("mensagem.001");
+		MSG_002 			= get("mensagem.002");
+		MSG_003				= get("mensagem.003");
+		MSG_004				= get("mensagem.004");
+		ID_PRODUTO		    = get("id.produto");
 	}
 	
 	/**

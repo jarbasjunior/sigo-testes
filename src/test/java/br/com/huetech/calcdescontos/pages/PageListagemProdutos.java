@@ -1,5 +1,6 @@
 package br.com.huetech.calcdescontos.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -16,13 +17,10 @@ public class PageListagemProdutos extends PageObjectGeneric<PageListagemProdutos
 	@FindBy(id = "html/body/div[@class='footer text-center']/p")
 	WebElement rodape;
 	
-	@FindBy(xpath = "html/body/div[1]/div[2]/table/tbody/tr/td[1][contains(.,'1')]/../td[4]/a[@href='index.php?p=calcularDesconto&pid=1']/span")
-	WebElement botaoCalcularDesconto;
-	
 	public void selecionaProdutoPorIdParaCalculoDesconto(String idProduto){
-		Log.info("Escolhendo produto para calcular desconto...");
-		aguardarElementoVisivel(botaoCalcularDesconto);
+		Log.info("Selecionando produto para cálculo de desconto...");
+		WebElement botaoCalcularDesconto = Selenium.getDriver().findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[4]/a[@href='index.php?p=calcularDesconto&pid="+idProduto+"']/span"));
 		botaoCalcularDesconto.click();
 	}
-
+	
 }

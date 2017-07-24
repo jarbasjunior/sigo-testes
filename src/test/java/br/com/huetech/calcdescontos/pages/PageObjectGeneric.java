@@ -61,7 +61,6 @@ public abstract class PageObjectGeneric<T> {
 			Log.erro("Erro ao buscar valor de atributo do elemento ["+element+"].");
 			Assert.fail("Erro ao buscar valor de atributo do elemento ["+element+"].");
 			return null;
-			// TODO: handle exception
 		}
 	}
 

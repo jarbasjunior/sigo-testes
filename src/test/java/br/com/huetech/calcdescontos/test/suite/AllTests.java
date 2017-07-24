@@ -1,4 +1,4 @@
-package br.com.huetech.test.calcdescontos.suite;
+package br.com.huetech.calcdescontos.test.suite;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

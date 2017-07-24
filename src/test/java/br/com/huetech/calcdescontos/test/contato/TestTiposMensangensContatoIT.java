@@ -1,4 +1,4 @@
-package br.com.huetech.test.calcdescontos.contato;
+package br.com.huetech.calcdescontos.test.contato;
 
 import org.junit.Test;
 
@@ -24,27 +24,27 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	 */
 
 	@Test
-	public void verificaMsgTipoDuvidaIdadeMenorQue18(){
-		Log.msgInicioTeste("verificaMsgTipoDuvidaIdadeMenorQue18()");
-		pageInicial.irParaPaginaInicial();
+	public void CTA001_verificaMsgTipoDuvidaIdadeMenorQue18(){
+		Log.msgInicioTeste("CTA001_verificaMsgTipoDuvidaIdadeMenorQue18()");
+		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoDuvidaIdadeMenorQue18();
 		pageContato.validaRetornoDaMsgEnviada(Property.TIPO_MSG_DUVIDA, Property.MENOR_QUE_18);
 	}
 	
 	@Test
-	public void verificaMsgTipoDuvidaIdadeEntre18e60(){
-		Log.msgInicioTeste("verificaMsgTipoDuvidaIdadeEntre18e60()");
-		pageInicial.irParaPaginaInicial();
+	public void CTA002_verificaMsgTipoDuvidaIdadeEntre18e60(){
+		Log.msgInicioTeste("CTA002_verificaMsgTipoDuvidaIdadeEntre18e60()");
+		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoDuvidaIdadeEntre18e60();
 		pageContato.validaRetornoDaMsgEnviada(Property.TIPO_MSG_DUVIDA, Property.ENTRE_18_E_60);
 	}
 	
 	@Test
-	public void verificaMsgTipoDuvidaIdadeMaiorQue60(){
-		Log.msgInicioTeste("verificaMsgTipoDuvidaIdadeMaiorQue60()");
-		pageInicial.irParaPaginaInicial();
+	public void CTA003_verificaMsgTipoDuvidaIdadeMaiorQue60(){
+		Log.msgInicioTeste("CTA003_verificaMsgTipoDuvidaIdadeMaiorQue60()");
+		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoDuvidaIdadeMaiorQue60();
 		pageContato.validaRetornoDaMsgEnviada(Property.TIPO_MSG_DUVIDA, Property.MAIOR_QUE_60);
@@ -55,27 +55,27 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	 */
 	
 	@Test
-	public void verificaMsgTipoSugestaoIdadeMenorQue18(){
-		Log.msgInicioTeste("verificaMsgTipoSugestaoIdadeMenorQue18()");
-		pageInicial.irParaPaginaInicial();
+	public void CTA004_verificaMsgTipoSugestaoIdadeMenorQue18(){
+		Log.msgInicioTeste("CTA004_verificaMsgTipoSugestaoIdadeMenorQue18()");
+		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoSugestaoIdadeMenorQue18();
 		pageContato.validaRetornoDaMsgEnviada(Property.TIPO_MSG_SUGESTAO, Property.MENOR_QUE_18);
 	}
 	
 	@Test
-	public void verificaMsgTipoSugestaoIdadeEntre18e60(){
-		Log.msgInicioTeste("verificaMsgTipoSugestaoIdadeEntre18e60()");
-		pageInicial.irParaPaginaInicial();
+	public void CTA005_verificaMsgTipoSugestaoIdadeEntre18e60(){
+		Log.msgInicioTeste("CTA005_verificaMsgTipoSugestaoIdadeEntre18e60()");
+		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoSugestaoIdadeEntre18e60();
 		pageContato.validaRetornoDaMsgEnviada(Property.TIPO_MSG_SUGESTAO, Property.ENTRE_18_E_60);
 	}
 	
 	@Test
-	public void verificaMsgTipoSugestaoIdadeMaiorQue60(){
-		Log.msgInicioTeste("verificaMsgTipoSugestaoIdadeMaiorQue60()");
-		pageInicial.irParaPaginaInicial();
+	public void CTA006_verificaMsgTipoSugestaoIdadeMaiorQue60(){
+		Log.msgInicioTeste("CTA006_verificaMsgTipoSugestaoIdadeMaiorQue60()");
+		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoSugestaoIdadeMaiorQue60();
 		pageContato.validaRetornoDaMsgEnviada(Property.TIPO_MSG_SUGESTAO, Property.MAIOR_QUE_60);
@@ -86,27 +86,27 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	 */
 	
 	@Test
-	public void verificaMsgTipoReclamacaoIdadeMenorQue18(){
-		Log.msgInicioTeste("verificaMsgTipoReclamacaoIdadeMenorQue18()");
-		pageInicial.irParaPaginaInicial();
+	public void CTA007_verificaMsgTipoReclamacaoIdadeMenorQue18(){
+		Log.msgInicioTeste("CTA007_verificaMsgTipoReclamacaoIdadeMenorQue18()");
+		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoReclamacaoIdadeMenorQue18();
 		pageContato.validaRetornoDaMsgEnviada(Property.TIPO_MSG_RECLAMACAO, Property.MENOR_QUE_18);
 	}
 	
 	@Test
-	public void verificaMsgTipoReclamacaoIdadeEntre18e60(){
-		Log.msgInicioTeste("verificaMsgTipoReclamacaoIdadeEntre18e60()");
-		pageInicial.irParaPaginaInicial();
+	public void CTA008_verificaMsgTipoReclamacaoIdadeEntre18e60(){
+		Log.msgInicioTeste("CTA008_verificaMsgTipoReclamacaoIdadeEntre18e60()");
+		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoReclamacaoIdadeEntre18e60();
 		pageContato.validaRetornoDaMsgEnviada(Property.TIPO_MSG_RECLAMACAO, Property.ENTRE_18_E_60);
 	}
 	
 	@Test
-	public void verificaMsgTipoReclamacaoIdadeMaiorQue60(){
-		Log.msgInicioTeste("verificaMsgTipoReclamacaoIdadeMaiorQue60()");
-		pageInicial.irParaPaginaInicial();
+	public void CTA009_verificaMsgTipoReclamacaoIdadeMaiorQue60(){
+		Log.msgInicioTeste("CTA009_verificaMsgTipoReclamacaoIdadeMaiorQue60()");
+		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoReclamacaoIdadeMaiorQue60();
 		pageContato.validaRetornoDaMsgEnviada(Property.TIPO_MSG_RECLAMACAO, Property.MAIOR_QUE_60);

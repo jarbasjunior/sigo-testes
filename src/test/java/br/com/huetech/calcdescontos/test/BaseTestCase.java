@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import br.com.huetech.calcdescontos.common.Property;
 import br.com.huetech.calcdescontos.common.Selenium;
-import br.com.huetech.test.calcdescontos.suite.AllTests;
+import br.com.huetech.calcdescontos.test.suite.AllTests;
 public class BaseTestCase {
 	
 	

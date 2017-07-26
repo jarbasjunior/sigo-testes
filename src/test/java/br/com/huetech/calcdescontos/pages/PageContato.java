@@ -135,6 +135,7 @@ public class PageContato extends PageObjectGeneric<PageContato> {
 	/*
 	 * ENVIAR MENSAGENS DO TIPO RECLAMAÇÃO
 	 */
+	
 	public void enviarMsgTipoReclamacaoIdadeMenorQue18(){
 		Log.info("Enviando mensagem do tipo ["+getValorAtributo(radioReclamacao)+"], com idade ["+Property.MENOR_QUE_18+"]...");
 		aguardarElementoVisivel(botaoEnviarMsg);

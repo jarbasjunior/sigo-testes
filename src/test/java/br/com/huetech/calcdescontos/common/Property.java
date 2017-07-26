@@ -6,7 +6,7 @@ import java.util.Properties;
 /**
 * @author jarbas.junior
 * Define o caminho do driver dos diferentes browsers
-* Acessa as configura��es definidas no config.properties e retorna a informa��o 
+* Acessa as configurações definidas no config.properties e retorna a informação 
 */
 public abstract class Property {
 

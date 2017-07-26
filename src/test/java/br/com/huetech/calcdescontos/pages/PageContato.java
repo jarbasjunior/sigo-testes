@@ -40,7 +40,7 @@ public class PageContato extends PageObjectGeneric<PageContato> {
 	WebElement campoMsg;
 	
 	@FindBy(xpath = ".//*[@id='success.msg']/strong")
-	WebElement msgSucesso;
+	WebElement mensagem;
 	
 	/*
 	 * ENVIAR MENSAGENS DO TIPO DÚVIDA
@@ -135,6 +135,7 @@ public class PageContato extends PageObjectGeneric<PageContato> {
 	/*
 	 * ENVIAR MENSAGENS DO TIPO RECLAMAÇÃO
 	 */
+	
 	public void enviarMsgTipoReclamacaoIdadeMenorQue18(){
 		Log.info("Enviando mensagem do tipo ["+getValorAtributo(radioReclamacao)+"], com idade ["+Property.MENOR_QUE_18+"]...");
 		aguardarElementoVisivel(botaoEnviarMsg);
@@ -182,19 +183,35 @@ public class PageContato extends PageObjectGeneric<PageContato> {
 	 * 
 	 * QUALQUER TIPO DE MENSAGEM (dúvida, sugestão ou reclamação) e
 	 * 
-	 * QUALQUER FAIXA ETÁRIA (< 18, > 17 e < 61, > 60)
+	 * QUALQUER FAIXA ETÁRIA (< 18; > 17 e < 61; > 60)
 	 * 
 	 */
-	public void validaRetornoDaMsgEnviada(String tipoMsg, String faixaEtaria){
+	public void validaRetornoDaMsgEnviada(String msgSucesso, String msgFalha, String nomeTest){
 		Log.info("Validando retorno da mensagem enviada...");
-		String retornoEsperado = tipoMsg+"-"+faixaEtaria+Property.MSG_SUCESSO;
+		
+		if (mensagem.getText().equals(msgFalha)) {
+			Log.erro("Teste ["+nomeTest+"] falhou!");
+			Utils.assertFail(msgFalha);
+		}
+		
+		Log.info("Retorno esperado        ["+msgSucesso+"].");
+		Log.info("Retorno exibido em tela ["+mensagem.getText()+"].");
+		
+		try {
+			Utils.assertEquals(msgSucesso, mensagem.getText());
+		} catch (Exception e) {
+			Log.mensagemErro("Teste ["+nomeTest+"] falhou!");
+		}
+		
+		/*String retornoEsperado = tipoMsg+"-"+faixaEtaria+Property.MSG_SUCESSO;
+		
 		try {
 			Utils.assertEquals(retornoEsperado, msgSucesso.getText());
 			Log.info("Retorno esperado ["+retornoEsperado+"] exibido na tela.");
 			Log.info("Função executada com sucesso.");
 		} catch (Exception e) {
 			Log.mensagemErro("Falha no retorno da mensagem :/");
-		}
+		}*/
 	}
 
 }

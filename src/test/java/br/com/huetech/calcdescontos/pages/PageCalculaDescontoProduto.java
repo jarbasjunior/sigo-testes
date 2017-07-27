@@ -23,13 +23,13 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 	@FindBy(id = "calculardesconto.button.calcular")
 	WebElement botaoCalcularDesconto;
 	
-	@FindBy(id = "html/body/div[1]/div[2]/div/p[4]/strong")
+	@FindBy(xpath = "html/body/div[1]/div[2]/div/p[4]")
 	WebElement valorProduto;
 	
 	
-	public int calcularDesconto(String tipoCliente, String qtd){
+	public Double calcularDesconto(String tipoCliente, String qtd){
 		aguardarElementoVisivel(botaoCalcularDesconto);
-		int vlproduto = Utils.converteStringParaInt(valorProduto.getAttribute("strong")); // CORRIGIR
+		Double vlproduto = Utils.conversorStringDouble(valorProduto.getText().substring(23));
 		Log.info("Selecionando cliente do tipo ["+tipoCliente+"]...");
 		selectElementByVisibleText(comboTipoCliente, tipoCliente);
 		Log.info("Informando quantidade ["+qtd+"]...");

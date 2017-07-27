@@ -3,10 +3,12 @@ package br.com.huetech.calcdescontos.test.calculos;
 import org.junit.Test;
 
 import br.com.huetech.calcdescontos.common.Property;
+import br.com.huetech.calcdescontos.pages.PageCalculaDescontoProduto;
 import br.com.huetech.calcdescontos.pages.PageInicial;
 import br.com.huetech.calcdescontos.pages.PageListagemProdutos;
 import br.com.huetech.calcdescontos.test.BaseTestCase;
 import br.com.huetech.calcdescontos.util.Log;
+import br.com.huetech.calcdescontos.util.Utils;
 
 /**
  * 
@@ -16,18 +18,23 @@ import br.com.huetech.calcdescontos.util.Log;
  */
 public class TestCalculosDescontosIT extends BaseTestCase {
 
-	PageInicial			 pageInicial          = new PageInicial();
-	PageListagemProdutos pageListagemProdutos = new PageListagemProdutos();
+	String               	   nomeTeste            	  = "";
+	PageInicial			 	   pageInicial          	  = new PageInicial();
+	PageListagemProdutos 	   pageListagemProdutos       = new PageListagemProdutos();
+	PageCalculaDescontoProduto pageCalculaDescontoProduto = new PageCalculaDescontoProduto();
 	
 	/**
 	 * TESTES CÁLCULOS 
 	 */
 
 	@Test
-	public void calculaDesconto(){
-		Log.msgInicioTeste("calculaDesconto()");
+	public void CTA010_RN01_verificaDesconto10QtdMenorQue100ClientesA(){
+		nomeTeste = "CTA010_RN01_verificaDesconto10QtdMenorQue100ClientesA()";
+		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaCalculoDescontos();
 		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO);
+		int valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_A, Utils.geraNumeroEntre1_99());
+		Log.msgFimTeste(nomeTeste);
 	}
 }

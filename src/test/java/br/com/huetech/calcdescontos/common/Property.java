@@ -25,6 +25,9 @@ public abstract class Property {
 	public static final String INICIO_MSG;
 	public static final String FIM_MSG;
 	public static final String MSG_SUCESSO;
+	public static final String TIPO_CLIENTE_A;
+	public static final String TIPO_CLIENTE_B;
+	public static final String TIPO_CLIENTE_C;
 	public static final String TIPO_MSG_DUVIDA;
 	public static final String TIPO_MSG_SUGESTAO;
 	public static final String TIPO_MSG_RECLAMACAO;
@@ -52,6 +55,9 @@ public abstract class Property {
 		INICIO_MSG		    = get("inicio.mensagem");
 		FIM_MSG			    = get("fim.mensagem");
 		MSG_SUCESSO		    = get("mensagem.sucesso");
+		TIPO_CLIENTE_A	    = get("cliente.a");
+		TIPO_CLIENTE_B	    = get("cliente.b");
+		TIPO_CLIENTE_C	    = get("cliente.c");
 		TIPO_MSG_DUVIDA	    = get("mensagem.duvida");
 		TIPO_MSG_SUGESTAO   = get("mensagem.sugestao");
 		TIPO_MSG_RECLAMACAO = get("mensagem.reclamacao");

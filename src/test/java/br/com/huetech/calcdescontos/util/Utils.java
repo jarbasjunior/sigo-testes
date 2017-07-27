@@ -3,6 +3,7 @@ package br.com.huetech.calcdescontos.util;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -90,6 +91,31 @@ public abstract class Utils {
 		nf.setMinimumFractionDigits(2);
 		nf.setMaximumFractionDigits(2);
 		return nf.format(value).replace(",","");
+	}
+	
+	public static int geraNumeroEntreIntervalo(int min, int max){
+		Random random = new Random();
+		return random.nextInt((max - min) + 1) + min;
+	}
+	
+	public static String geraNumeroEntre1_99(){
+		return converteInteiroParaString(geraNumeroEntreIntervalo(1, 99));
+	}
+	
+	public static String geraNumeroEntre100_999(){
+		return converteInteiroParaString(geraNumeroEntreIntervalo(100, 999));
+	}
+	
+	public static String geraNumeroEntre1000_10000(){
+		return converteInteiroParaString(geraNumeroEntreIntervalo(1000, 10000));
+	}
+	
+	public static String converteInteiroParaString(int numero){
+		return Integer.toString(numero);
+	}
+	
+	public static int converteStringParaInt(String str){
+		return Integer.parseInt(str);
 	}
 	
 	

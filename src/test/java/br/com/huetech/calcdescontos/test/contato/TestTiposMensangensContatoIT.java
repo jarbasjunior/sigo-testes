@@ -21,12 +21,12 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	PageContato pageContato = new PageContato();
 	
 	/**
-	 * TESTES MENSAGENS TIPO DÚVIDA 
+	 * TESTES MENSAGENS TIPO DÚVIDA - REQUISITO 003
 	 */
 
 	@Test
-	public void CTA001_verificaMsgTipoDuvidaIdadeMenorQue18(){
-		nomeTeste = "CTA001_verificaMsgTipoDuvidaIdadeMenorQue18()";
+	public void CTA001_REQ003_verificaMsgTipoDuvidaIdadeMenorQue18(){
+		nomeTeste = "CTA001_REQ003_verificaMsgTipoDuvidaIdadeMenorQue18()";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
@@ -36,8 +36,8 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	}
 	
 	@Test
-	public void CTA002_verificaMsgTipoDuvidaIdadeEntre18e60(){
-		nomeTeste = "CTA002_verificaMsgTipoDuvidaIdadeEntre18e60()";
+	public void CTA002_REQ003_verificaMsgTipoDuvidaIdadeEntre18e60(){
+		nomeTeste = "CTA002_REQ003_verificaMsgTipoDuvidaIdadeEntre18e60";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
@@ -47,8 +47,8 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	}
 	
 	@Test
-	public void CTA003_verificaMsgTipoDuvidaIdadeMaiorQue60(){
-		nomeTeste = "CTA003_verificaMsgTipoDuvidaIdadeMaiorQue60()";
+	public void CTA003_REQ003_verificaMsgTipoDuvidaIdadeMaiorQue60(){
+		nomeTeste = "CTA003_REQ003_verificaMsgTipoDuvidaIdadeMaiorQue60()";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
@@ -58,12 +58,12 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	}
 	
 	/**
-	 * TESTES MENSAGENS TIPO SUGESTÃO 
+	 * TESTES MENSAGENS TIPO SUGESTÃO - REQUISITO 003
 	 */
 	
 	@Test
-	public void CTA004_verificaMsgTipoSugestaoIdadeMenorQue18(){
-		nomeTeste = "CTA004_verificaMsgTipoSugestaoIdadeMenorQue18()";
+	public void CTA004_REQ003_verificaMsgTipoSugestaoIdadeMenorQue18(){
+		nomeTeste = "CTA004_REQ003_verificaMsgTipoSugestaoIdadeMenorQue18()";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
@@ -73,8 +73,8 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	}
 	
 	@Test
-	public void CTA005_verificaMsgTipoSugestaoIdadeEntre18e60(){
-		nomeTeste = "CTA005_verificaMsgTipoSugestaoIdadeEntre18e60()";
+	public void CTA005_REQ003verificaMsgTipoSugestaoIdadeEntre18e60(){
+		nomeTeste = "CTA005_REQ003verificaMsgTipoSugestaoIdadeEntre18e60()";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
@@ -84,8 +84,8 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	}
 	
 	@Test
-	public void CTA006_verificaMsgTipoSugestaoIdadeMaiorQue60(){
-		nomeTeste = "CTA006_verificaMsgTipoSugestaoIdadeMaiorQue60()";
+	public void CTA006_REQ003_verificaMsgTipoSugestaoIdadeMaiorQue60(){
+		nomeTeste = "CTA006_REQ003_verificaMsgTipoSugestaoIdadeMaiorQue60()";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
@@ -95,12 +95,12 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	}
 	
 	/**
-	 * TESTES MENSAGENS TIPO RECLAMAÇÃO 
+	 * TESTES MENSAGENS TIPO RECLAMAÇÃO - REQUISITO 003 
 	 */
 	
 	@Test
-	public void CTA007_verificaMsgTipoReclamacaoIdadeMenorQue18(){
-		nomeTeste = "CTA007_verificaMsgTipoReclamacaoIdadeMenorQue18()";
+	public void CTA007_REQ003_verificaMsgTipoReclamacaoIdadeMenorQue18(){
+		nomeTeste = "CTA007_REQ003_verificaMsgTipoReclamacaoIdadeMenorQue18()";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
@@ -110,8 +110,8 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	}
 	
 	@Test
-	public void CTA008_verificaMsgTipoReclamacaoIdadeEntre18e60(){
-		nomeTeste = "CTA008_verificaMsgTipoReclamacaoIdadeEntre18e60()";
+	public void CTA008_REQ003_verificaMsgTipoReclamacaoIdadeEntre18e60(){
+		nomeTeste = "CTA008_REQ003_verificaMsgTipoReclamacaoIdadeEntre18e60()";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();
@@ -121,8 +121,8 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 	}
 	
 	@Test
-	public void CTA009_verificaMsgTipoReclamacaoIdadeMaiorQue60(){
-		nomeTeste = "CTA009_verificaMsgTipoReclamacaoIdadeMaiorQue60()";
+	public void CTA009_REQ003_verificaMsgTipoReclamacaoIdadeMaiorQue60(){
+		nomeTeste = "CTA009_REQ003_verificaMsgTipoReclamacaoIdadeMaiorQue60()";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaPaginaContato();

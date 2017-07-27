@@ -18,7 +18,7 @@ public class PageListagemProdutos extends PageObjectGeneric<PageListagemProdutos
 	WebElement rodape;
 	
 	public void selecionaProdutoPorIdParaCalculoDesconto(String idProduto){
-		Log.info("Selecionando produto para cálculo de desconto...");
+		Log.info("Selecionando produto id["+idProduto+"] para cálculo de desconto...");
 		WebElement botaoCalcularDesconto = Selenium.getDriver().findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[4]/a[@href='index.php?p=calcularDesconto&pid="+idProduto+"']/span"));
 		botaoCalcularDesconto.click();
 	}

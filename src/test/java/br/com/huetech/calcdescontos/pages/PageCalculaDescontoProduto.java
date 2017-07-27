@@ -39,7 +39,47 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 		return vlproduto;
 	}
 	
-	public void validaCalculoRealizado(){
+	public void validaCalculoRealizado(Double valorProduto, String desconto){
 		Log.info("Validando cálculo realizado...");
+		String valorComDesconto = "";
+		switch (desconto) {
+		case "5":
+			valorComDesconto = calculaDesconto5Porcento(valorProduto);
+			break;
+		case "10":
+			valorComDesconto = calculaDesconto10Porcento(valorProduto);
+			break;
+		case "15":
+			valorComDesconto = calculaDesconto15Porcento(valorProduto);
+			break;
+		case "20":
+			valorComDesconto = calculaDesconto20Porcento(valorProduto);
+			break;
+		}
+		
+		valorComDesconto = formataParaValorDaTela(valorComDesconto);
+	}
+	
+	public String calculaDesconto5Porcento(Double valor){
+		valor = valor - (valor * .05);
+		return Utils.conversorDoubleString(valor);
+	}
+	public String calculaDesconto10Porcento(Double valor){
+		valor = valor - (valor * .1);
+		return Utils.conversorDoubleString(valor);
+	}
+	public String calculaDesconto15Porcento(Double valor){
+		valor = valor - (valor * .15);
+		return Utils.conversorDoubleString(valor);
+	}
+	public String calculaDesconto20Porcento(Double valor){
+		valor = valor - (valor * .2);
+		return Utils.conversorDoubleString(valor);
+	}
+	public String formataParaValorDaTela(String str){
+		String a         	  = str.substring(2, 8).replace(",", ".");
+		String b         	  = str.substring(0, 2).replace(".", ",");
+		String valorFormatado = a.concat(b);
+		return valorFormatado;
 	}
 }

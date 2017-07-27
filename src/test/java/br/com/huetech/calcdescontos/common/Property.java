@@ -35,37 +35,45 @@ public abstract class Property {
 	public static final String MSG_002;
 	public static final String MSG_003;
 	public static final String MSG_004;
+	public static final String DESCONTO_5_PORCENTO;
+	public static final String DESCONTO_10_PORCENTO;
+	public static final String DESCONTO_15_PORCENTO;
+	public static final String DESCONTO_20_PORCENTO;
 	public static final String ID_PRODUTO;
 	
 	private static final String PROPERTIES_FILE = "br/com/huetech/calcdescontos/config.properties";
 	
 	static{
-		IE64_DRIVE_PATH     = new File("").getAbsolutePath() + "\\src\\test\\resources\\IEDriverServer.exe";
-		CHROME_DRIVE_PATH   = new File("").getAbsolutePath() + "\\src\\test\\resources\\chromedriver.exe";
-		FIREFOX_DRIVE_PATH  = new File("").getAbsolutePath() + "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe";
-		BROWSER_NAME        = get("browser.name");
-		URL                 = get("site.address");
-		LOGIN               = get("login");
-		PASSWORD            = get("password");
-		NOME           	    = get("nome");
-		EMAIL			    = get("email");
-		MENOR_QUE_18	    = get("menor.18");
-		ENTRE_18_E_60	    = get("entre.18.60");
-		MAIOR_QUE_60	    = get("maior.60");
-		INICIO_MSG		    = get("inicio.mensagem");
-		FIM_MSG			    = get("fim.mensagem");
-		MSG_SUCESSO		    = get("mensagem.sucesso");
-		TIPO_CLIENTE_A	    = get("cliente.a");
-		TIPO_CLIENTE_B	    = get("cliente.b");
-		TIPO_CLIENTE_C	    = get("cliente.c");
-		TIPO_MSG_DUVIDA	    = get("mensagem.duvida");
-		TIPO_MSG_SUGESTAO   = get("mensagem.sugestao");
-		TIPO_MSG_RECLAMACAO = get("mensagem.reclamacao");
-		MSG_001 			= get("mensagem.001");
-		MSG_002 			= get("mensagem.002");
-		MSG_003				= get("mensagem.003");
-		MSG_004				= get("mensagem.004");
-		ID_PRODUTO		    = get("id.produto");
+		IE64_DRIVE_PATH      = new File("").getAbsolutePath() + "\\src\\test\\resources\\IEDriverServer.exe";
+		CHROME_DRIVE_PATH    = new File("").getAbsolutePath() + "\\src\\test\\resources\\chromedriver.exe";
+		FIREFOX_DRIVE_PATH   = new File("").getAbsolutePath() + "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe";
+		BROWSER_NAME         = get("browser.name");
+		URL                  = get("site.address");
+		LOGIN                = get("login");
+		PASSWORD             = get("password");
+		NOME           	     = get("nome");
+		EMAIL			     = get("email");
+		MENOR_QUE_18	     = get("menor.18");
+		ENTRE_18_E_60	     = get("entre.18.60");
+		MAIOR_QUE_60	     = get("maior.60");
+		INICIO_MSG		     = get("inicio.mensagem");
+		FIM_MSG			     = get("fim.mensagem");
+		MSG_SUCESSO		     = get("mensagem.sucesso");
+		TIPO_CLIENTE_A	     = get("cliente.a");
+		TIPO_CLIENTE_B	     = get("cliente.b");
+		TIPO_CLIENTE_C	     = get("cliente.c");
+		TIPO_MSG_DUVIDA	     = get("mensagem.duvida");
+		TIPO_MSG_SUGESTAO    = get("mensagem.sugestao");
+		TIPO_MSG_RECLAMACAO  = get("mensagem.reclamacao");
+		MSG_001 			 = get("mensagem.001");
+		MSG_002 			 = get("mensagem.002");
+		MSG_003				 = get("mensagem.003");
+		MSG_004				 = get("mensagem.004");
+		DESCONTO_5_PORCENTO  = get("desconto.5");
+		DESCONTO_10_PORCENTO = get("desconto.10");
+		DESCONTO_15_PORCENTO = get("desconto.15");
+		DESCONTO_20_PORCENTO = get("desconto.20");
+		ID_PRODUTO		     = get("id.produto");
 	}
 	
 	/**

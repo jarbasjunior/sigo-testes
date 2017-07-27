@@ -39,5 +39,6 @@ public class PageInicial extends PageObjectGeneric<PageInicial> {
 		Log.info("Direcionando para lista de produtos...");
 		aguardarElementoVisivel(botaoCalcularDesconto);
 		botaoCalcularDesconto.click();
+		botaoCalcularDesconto.click();
 	}
 }

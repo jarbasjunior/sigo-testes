@@ -76,14 +76,14 @@ public abstract class Utils {
 	}
 	
 	public static String conversorDoubleString(double valor){
-		DecimalFormat df=new DecimalFormat("0.00");  
+		DecimalFormat df = new DecimalFormat("#,###.00");  
 		String novoValor = df.format(valor);
 		return novoValor;
 	}
 	
-	public static Double conversorStringDouble(String valor){
-		String novoValor = valor.replace(",", ".");
-		return Double.parseDouble(novoValor);
+	public static Double conversorStringDouble(String valorString){
+		String valorDouble = valorString.replace(",", "");
+		return Double.valueOf(valorDouble);
 	} 
 	
 	public static String converterValoresFloatToString(Float value) {

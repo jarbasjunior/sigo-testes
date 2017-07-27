@@ -26,6 +26,7 @@ public class PageInicial extends PageObjectGeneric<PageInicial> {
 		Log.info("Direcionando para página contato...");
 		aguardarElementoVisivel(botaoContato);
 		botaoContato.click();
+		botaoContato.click();
 	}
 	
 	public void abaPaginaInicial(){

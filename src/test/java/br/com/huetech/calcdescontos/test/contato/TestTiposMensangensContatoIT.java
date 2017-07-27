@@ -32,6 +32,7 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoDuvidaIdadeMenorQue18();
 		pageContato.validaRetornoDaMsgEnviada(Property.MSG_003, Property.MSG_004, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
@@ -42,6 +43,7 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoDuvidaIdadeEntre18e60();
 		pageContato.validaRetornoDaMsgEnviada(Property.MSG_003, Property.MSG_004, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
@@ -52,6 +54,7 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoDuvidaIdadeMaiorQue60();
 		pageContato.validaRetornoDaMsgEnviada(Property.MSG_003, Property.MSG_004, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
 	}
 	
 	/**
@@ -66,6 +69,7 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoSugestaoIdadeMenorQue18();
 		pageContato.validaRetornoDaMsgEnviada(Property.MSG_003, Property.MSG_004, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
@@ -76,6 +80,7 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoSugestaoIdadeEntre18e60();
 		pageContato.validaRetornoDaMsgEnviada(Property.MSG_003, Property.MSG_004, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
@@ -86,6 +91,7 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoSugestaoIdadeMaiorQue60();
 		pageContato.validaRetornoDaMsgEnviada(Property.MSG_003, Property.MSG_004, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
 	}
 	
 	/**
@@ -100,6 +106,7 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoReclamacaoIdadeMenorQue18();
 		pageContato.validaRetornoDaMsgEnviada(Property.MSG_003, Property.MSG_004, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
@@ -110,6 +117,7 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoReclamacaoIdadeEntre18e60();
 		pageContato.validaRetornoDaMsgEnviada(Property.MSG_003, Property.MSG_004, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
@@ -120,5 +128,6 @@ public class TestTiposMensangensContatoIT extends BaseTestCase {
 		pageInicial.irParaPaginaContato();
 		pageContato.enviarMsgTipoReclamacaoIdadeMaiorQue60();
 		pageContato.validaRetornoDaMsgEnviada(Property.MSG_003, Property.MSG_004, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
 	}
 }

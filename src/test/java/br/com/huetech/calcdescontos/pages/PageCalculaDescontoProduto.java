@@ -33,13 +33,16 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 	public Double calcularDesconto(String tipoCliente, String qtd, String desconto){
 		aguardarElementoVisivel(botaoCalcularDesconto);
 		Double vlproduto = Utils.conversorStringDouble(valorProduto.getText().substring(23));
-		Log.info("Cliente do tipo.. ["+tipoCliente+"].");
+		Log.info("Cliente do tipo. ["+tipoCliente+"].");
 		selectElementByVisibleText(comboTipoCliente, tipoCliente);
-		Log.info("Quantidade....... ["+qtd+"].");
+		Log.info("Quantidade...... ["+qtd+"].");
 		preencherCampo(campoQuantidade, qtd);
-		Log.info("Valor produto ....["+valorProduto.getText().substring(23)+"].");
-		Log.info("Desconto aplicado ["+desconto+"%].");
-		Log.info("Calculando desconto...");
+		Log.info("Valor do produto ["+valorProduto.getText().substring(23)+"].");
+		if (!desconto.equals("Não se aplica desconto para quantidade escolhida.")) {
+			Log.info("Desconto permitido ["+desconto+"%].");
+			Log.info("Calculando desconto...");
+		}else
+			Log.info("["+desconto+"]");
 		botaoCalcularDesconto.click();
 		return vlproduto;
 	}
@@ -59,6 +62,9 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 			break;
 		case "20":
 			valorComDesconto = calculaDesconto20Porcento(valorProduto);
+			break;
+		default:
+			valorComDesconto = Utils.conversorDoubleString(valorProduto);
 			break;
 		}
 		

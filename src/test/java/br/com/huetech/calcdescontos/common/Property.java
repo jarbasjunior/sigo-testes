@@ -39,6 +39,7 @@ public abstract class Property {
 	public static final String DESCONTO_10_PORCENTO;
 	public static final String DESCONTO_15_PORCENTO;
 	public static final String DESCONTO_20_PORCENTO;
+	public static final String SEM_DESCONTO;
 	public static final String ID_PRODUTO;
 	
 	private static final String PROPERTIES_FILE = "br/com/huetech/calcdescontos/config.properties";
@@ -73,6 +74,7 @@ public abstract class Property {
 		DESCONTO_10_PORCENTO = get("desconto.10");
 		DESCONTO_15_PORCENTO = get("desconto.15");
 		DESCONTO_20_PORCENTO = get("desconto.20");
+		SEM_DESCONTO         = get("sem.desconto");
 		ID_PRODUTO		     = get("id.produto");
 	}
 	

@@ -62,4 +62,40 @@ public class TestCalculosDescontosIT extends BaseTestCase {
 		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.SEM_DESCONTO, nomeTeste);
 		Log.msgFimTeste(nomeTeste);
 	}
+	
+	@Test
+	public void CTA013_RN01_verificaDesconto15PorcentoQtdMenorQue100ClientesB(){
+		nomeTeste = "CTA013_RN01_verificaDesconto15PorcentoQtdMenorQue100ClientesB";
+		Log.msgInicioTeste(nomeTeste);
+		pageInicial.abaPaginaInicial();
+		pageInicial.irParaCalculoDescontos();
+		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO);
+		Double valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_B, Utils.geraNumeroEntre1_99(), Property.DESCONTO_15_PORCENTO);
+		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.DESCONTO_15_PORCENTO, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
+	}
+	
+	@Test
+	public void CTA014_RN01_verificaDesconto10PorcentoQtdEntre100_e_999ClientesB(){
+		nomeTeste = "CTA014_RN01_verificaDesconto10PorcentoQtdEntre100_e_999ClientesB()";
+		Log.msgInicioTeste(nomeTeste);
+		pageInicial.abaPaginaInicial();
+		pageInicial.irParaCalculoDescontos();
+		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO);
+		Double valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_B, Utils.geraNumeroEntre100_999(), Property.DESCONTO_10_PORCENTO);
+		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.DESCONTO_10_PORCENTO, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
+	}
+	
+	@Test
+	public void CTA015_RN01_verificaDesconto5PorcentoQtdMaiorQue999ClientesB(){
+		nomeTeste = "CTA015_RN01_verificaDesconto5PorcentoQtdMaiorQue999ClientesB";
+		Log.msgInicioTeste(nomeTeste);
+		pageInicial.abaPaginaInicial();
+		pageInicial.irParaCalculoDescontos();
+		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO);
+		Double valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_B, Utils.geraNumeroEntre1000_10000(), Property.DESCONTO_5_PORCENTO);
+		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.DESCONTO_5_PORCENTO, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
+	}
 }

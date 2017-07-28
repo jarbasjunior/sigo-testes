@@ -40,7 +40,7 @@ public class Selenium {
 				driver = new InternetExplorerDriver(capabilities);
 				
 			}else  if (Browser.FIREFOX.equals(browser)){
-				System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
+				//System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
 				driver = new FirefoxDriver();
 			}
 		}

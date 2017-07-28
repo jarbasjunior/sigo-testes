@@ -24,7 +24,7 @@ public class TestCalculosDescontosIT extends BaseTestCase {
 	PageCalculaDescontoProduto pageCalculaDescontoProduto = new PageCalculaDescontoProduto();
 	
 	/**
-	 * TESTES CÁLCULOS 
+	 * TESTES CÁLCULO DE DESCONTO PARA CLIENTE DO TIPO A
 	 */
 
 	@Test
@@ -63,6 +63,10 @@ public class TestCalculosDescontosIT extends BaseTestCase {
 		Log.msgFimTeste(nomeTeste);
 	}
 	
+	/**
+	 * TESTES CÁLCULO DE DESCONTO PARA CLIENTE DO TIPO B
+	 */
+	
 	@Test
 	public void CTA013_RN01_verificaDesconto15PorcentoQtdMenorQue100ClientesB(){
 		nomeTeste = "CTA013_RN01_verificaDesconto15PorcentoQtdMenorQue100ClientesB";
@@ -96,6 +100,61 @@ public class TestCalculosDescontosIT extends BaseTestCase {
 		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO);
 		Double valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_B, Utils.geraNumeroEntre1000_10000(), Property.DESCONTO_5_PORCENTO);
 		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.DESCONTO_5_PORCENTO, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
+	}
+	
+	/**
+	 * TESTES CÁLCULO DE DESCONTO PARA CLIENTE DO TIPO C
+	 */
+	
+	@Test
+	public void CTA016_RN01_verificaDesconto20PorcentoQtdMenorQue100ClientesC(){
+		nomeTeste = "CTA016_RN01_verificaDesconto20PorcentoQtdMenorQue100ClientesC";
+		Log.msgInicioTeste(nomeTeste);
+		pageInicial.abaPaginaInicial();
+		pageInicial.irParaCalculoDescontos();
+		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO);
+		Double valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_C, Utils.geraNumeroEntre1_99(), Property.DESCONTO_20_PORCENTO);
+		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.DESCONTO_20_PORCENTO, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
+	}
+	
+	@Test
+	public void CTA017_RN01_verificaDesconto15PorcentoQtdEntre100_e_999ClientesC(){
+		nomeTeste = "CTA017_RN01_verificaDesconto15PorcentoQtdEntre100_e_999ClientesC";
+		Log.msgInicioTeste(nomeTeste);
+		pageInicial.abaPaginaInicial();
+		pageInicial.irParaCalculoDescontos();
+		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO);
+		Double valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_C, Utils.geraNumeroEntre100_999(), Property.DESCONTO_15_PORCENTO);
+		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.DESCONTO_15_PORCENTO, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
+	}
+	
+	@Test
+	public void CTA018_RN01_verificaDesconto10PorcentoQtdMaiorQue999ClientesC(){
+		nomeTeste = "CTA018_RN01_verificaDesconto10PorcentoQtdMaiorQue999ClientesC";
+		Log.msgInicioTeste(nomeTeste);
+		pageInicial.abaPaginaInicial();
+		pageInicial.irParaCalculoDescontos();
+		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO);
+		Double valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_C, Utils.geraNumeroEntre1000_10000(), Property.DESCONTO_10_PORCENTO);
+		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.DESCONTO_10_PORCENTO, nomeTeste);
+		Log.msgFimTeste(nomeTeste);
+	}
+	
+	/**
+	 * TESTE PARA VERIFICAR OBRIGATORIEDADE DO PREENCHIMENTO DA QUANTIDADE
+	 */
+	@Test
+	public void CTA019_RN01_validaObrigatoriedadePreenchimentoDoCampoQuantidade(){
+		nomeTeste = "CTA019_RN01_validaObrigatoriedadePreenchimentoDoCampoQuantidade()";
+		nomeTeste = "CTA010_RN01_verificaDesconto10PorcentoQtdMenorQue100ClientesA"; 		
+		Log.msgInicioTeste(nomeTeste); 		
+		pageInicial.abaPaginaInicial(); 		
+		pageInicial.irParaCalculoDescontos(); 		
+		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO); 		
+		pageCalculaDescontoProduto.validaObrigatoriedadeDaQuantidade(nomeTeste); 		
 		Log.msgFimTeste(nomeTeste);
 	}
 }

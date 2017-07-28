@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import br.com.huetech.calcdescontos.common.Property;
 import br.com.huetech.calcdescontos.common.Selenium;
 import br.com.huetech.calcdescontos.util.Log;
 import br.com.huetech.calcdescontos.util.Utils;
@@ -29,6 +30,10 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 	@FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div[2]/p[5]")
 	WebElement valorProdutoComDesconto;
 	
+	@FindBy(xpath = ".//*[@id='success.msg']/strong")
+	WebElement msgRetorno;
+	
+	
 	
 	public Double calcularDesconto(String tipoCliente, String qtd, String desconto){
 		aguardarElementoVisivel(botaoCalcularDesconto);
@@ -45,6 +50,20 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 			Log.info("["+desconto+"]");
 		botaoCalcularDesconto.click();
 		return vlproduto;
+	}
+	
+	public void validaObrigatoriedadeDaQuantidade(String nomeTeste){
+		aguardarElementoVisivel(botaoCalcularDesconto);
+		botaoCalcularDesconto.click();
+		
+		Log.info("Mensagem esperada....... ["+Property.MSG_002+"].");
+		Log.info("Mensagem exibida na tela ["+msgRetorno.getText()+"].");
+		if (Property.MSG_002.equals(msgRetorno.getText())) {
+			Log.info("Teste ["+nomeTeste+"] PASSOU o/");
+		}else{
+			Log.erro("Teste ["+nomeTeste+"] FALHOU :/");
+			Utils.assertFail("Esperado -> ["+Property.MSG_002+"] -|- Retornado ->["+msgRetorno.getText()+"] :/");
+		}
 	}
 	
 	public void validaCalculoRealizado(Double valorProduto, String desconto, String nomeTeste){
@@ -73,7 +92,8 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 		Log.info("Valor esperado....... ["+valorComDesconto+"].");
 		Log.info("Valor exibido em tela ["+valorProdutoComDesconto.getText().substring(36)+"].");
 		
-		if (valorComDesconto.equals(valorProdutoComDesconto.getText().substring(36))) {
+		if (valorComDesconto.equals(valorProdutoComDesconto.getText().substring(36)) &&
+			Property.MSG_001.equals(msgRetorno.getText())) {
 			Log.info("Teste ["+nomeTeste+"] PASSOU o/");
 		}else{
 			Log.erro("Teste ["+nomeTeste+"] FALHOU :/");

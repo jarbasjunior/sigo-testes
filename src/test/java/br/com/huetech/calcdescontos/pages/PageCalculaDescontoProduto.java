@@ -26,20 +26,25 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 	@FindBy(xpath = "html/body/div[1]/div[2]/div/p[4]")
 	WebElement valorProduto;
 	
+	@FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div[2]/p[5]")
+	WebElement valorProdutoComDesconto;
 	
-	public Double calcularDesconto(String tipoCliente, String qtd){
+	
+	public Double calcularDesconto(String tipoCliente, String qtd, String desconto){
 		aguardarElementoVisivel(botaoCalcularDesconto);
 		Double vlproduto = Utils.conversorStringDouble(valorProduto.getText().substring(23));
-		Log.info("Selecionando cliente do tipo ["+tipoCliente+"]...");
+		Log.info("Cliente do tipo.. ["+tipoCliente+"].");
 		selectElementByVisibleText(comboTipoCliente, tipoCliente);
-		Log.info("Informando quantidade ["+qtd+"]...");
+		Log.info("Quantidade....... ["+qtd+"].");
 		preencherCampo(campoQuantidade, qtd);
+		Log.info("Valor produto ....["+valorProduto.getText().substring(23)+"].");
+		Log.info("Desconto aplicado ["+desconto+"%].");
 		Log.info("Calculando desconto...");
 		botaoCalcularDesconto.click();
 		return vlproduto;
 	}
 	
-	public void validaCalculoRealizado(Double valorProduto, String desconto){
+	public void validaCalculoRealizado(Double valorProduto, String desconto, String nomeTeste){
 		Log.info("Validando cálculo realizado...");
 		String valorComDesconto = "";
 		switch (desconto) {
@@ -58,6 +63,16 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 		}
 		
 		valorComDesconto = formataParaValorDaTela(valorComDesconto);
+		
+		Log.info("Valor esperado....... ["+valorComDesconto+"].");
+		Log.info("Valor exibido em tela ["+valorProdutoComDesconto.getText().substring(36)+"].");
+		
+		if (valorComDesconto.equals(valorProdutoComDesconto.getText().substring(36))) {
+			Log.info("Teste ["+nomeTeste+"] PASSOU o/");
+		}else{
+			Log.erro("Teste ["+nomeTeste+"] FALHOU :/");
+			Utils.assertFail("Esperado -> ["+valorComDesconto+"] -|- Retornado ->["+valorProdutoComDesconto.getText().substring(36)+"] :/");
+		}
 	}
 	
 	public String calculaDesconto5Porcento(Double valor){
@@ -79,7 +94,7 @@ public class PageCalculaDescontoProduto extends PageObjectGeneric<PageCalculaDes
 	public String formataParaValorDaTela(String str){
 		String a         	  = str.substring(2, 8).replace(",", ".");
 		String b         	  = str.substring(0, 2).replace(".", ",");
-		String valorFormatado = a.concat(b);
+		String valorFormatado = b.concat(a);
 		return valorFormatado;
 	}
 }

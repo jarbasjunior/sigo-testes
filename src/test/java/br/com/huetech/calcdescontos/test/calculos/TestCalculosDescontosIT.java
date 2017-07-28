@@ -34,8 +34,8 @@ public class TestCalculosDescontosIT extends BaseTestCase {
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaCalculoDescontos();
 		pageListagemProdutos.selecionaProdutoPorIdParaCalculoDesconto(Property.ID_PRODUTO);
-		Double valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_A, Utils.geraNumeroEntre1_99());
-		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.DESCONTO_10_PORCENTO);
+		Double valorProduto = pageCalculaDescontoProduto.calcularDesconto(Property.TIPO_CLIENTE_A, Utils.geraNumeroEntre1_99(), Property.DESCONTO_10_PORCENTO);
+		pageCalculaDescontoProduto.validaCalculoRealizado(valorProduto, Property.DESCONTO_10_PORCENTO, nomeTeste);
 		Log.msgFimTeste(nomeTeste);
 	}
 }

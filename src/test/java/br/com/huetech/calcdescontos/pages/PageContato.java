@@ -199,8 +199,10 @@ public class PageContato extends PageObjectGeneric<PageContato> {
 		
 		if (msgSucesso.equals(mensagem.getText())) {
 			Log.info("Teste ["+nomeTeste+"] PASSOU o/");
-		}else
+		}else{
 			Log.erro("Teste ["+nomeTeste+"] FALHOU :/");
+			Utils.assertFail("Teste ["+nomeTeste+"] FALHOU :/");
+		}
 		/*
 		 * 
 		 * O CÓDIGO APROVA OS TESTES DE MENSAGENS.

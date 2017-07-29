@@ -81,7 +81,7 @@ public class TestCalculosDescontosIT extends BaseTestCase {
 	
 	@Test
 	public void CTA014_RN01_verificaDesconto10PorcentoQtdEntre100_e_999ClientesB(){
-		nomeTeste = "CTA014_RN01_verificaDesconto10PorcentoQtdEntre100_e_999ClientesB()";
+		nomeTeste = "CTA014_RN01_verificaDesconto10PorcentoQtdEntre100_e_999ClientesB";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicial.abaPaginaInicial();
 		pageInicial.irParaCalculoDescontos();
@@ -148,7 +148,7 @@ public class TestCalculosDescontosIT extends BaseTestCase {
 	 */
 	@Test
 	public void CTA019_RN01_validaObrigatoriedadePreenchimentoDoCampoQuantidade(){
-		nomeTeste = "CTA019_RN01_validaObrigatoriedadePreenchimentoDoCampoQuantidade()";
+		nomeTeste = "CTA019_RN01_validaObrigatoriedadePreenchimentoDoCampoQuantidade";
 		nomeTeste = "CTA010_RN01_verificaDesconto10PorcentoQtdMenorQue100ClientesA"; 		
 		Log.msgInicioTeste(nomeTeste); 		
 		pageInicial.abaPaginaInicial(); 		

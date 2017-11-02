@@ -25,4 +25,7 @@ public class TestPesquisaGoogleIT extends BaseTestCase {
 		pageInicialGoogle.verificaRetornoPesquisaGoogle("https://www.google.com.br/");
 		Log.msgFimTeste(nomeTeste);
 	}
+	
+	//TODO colocar tempo de execução do teste; 
+	//TODO gravar log em arquivo.
 }

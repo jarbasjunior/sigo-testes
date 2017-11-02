@@ -44,7 +44,7 @@ public class Selenium {
 				driver = new InternetExplorerDriver(capabilities);
 				
 			} else  if (Browser.FIREFOX.equals(browser)){
-				//System.setProperty("webdriver.gecko.driver", "C:\\Users\\Jarbas Junior\\Git\\controleimoveis\\src\\test\\resources\\geckodriver.exe");
+				System.setProperty("webdriver.gecko.driver", "C:\\Users\\Jarbas Junior\\Git-jarbas\\sigo-testes\\src\\test\\resources\\geckodriver.exe");
 				driver = new FirefoxDriver();
 				
 			}else  if (Browser.PHANTOMJS.equals(browser)){

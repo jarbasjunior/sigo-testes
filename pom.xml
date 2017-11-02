@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.huetech</groupId>
-	<artifactId>calcdescontos</artifactId>
+	<artifactId>sigo-testes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>calculadora-desontos</name>
+	<name>sigo-testes</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -15,6 +15,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.github.detro.ghostdriver</groupId>
+			<artifactId>phantomjsdriver</artifactId>
+			<version>1.1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

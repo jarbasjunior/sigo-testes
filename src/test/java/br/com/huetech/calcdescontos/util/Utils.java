@@ -23,8 +23,9 @@ import br.com.huetech.calcdescontos.common.Selenium;
  */
 public abstract class Utils {
 
-	private static final WebDriver driver;
-	private static final WebDriverWait wait;
+	private static final   WebDriverWait wait;
+	private static final   WebDriver     driver;
+	private static boolean               isError = false;
 
 	static {
 		driver = Selenium.getDriver();
@@ -61,9 +62,20 @@ public abstract class Utils {
 	
 	public static void assertEquals(Object esperado, Object atual) {
 		try {
+			isError = !esperado.toString().equals(atual.toString());
 			Assert.assertEquals(esperado, atual);
 		} catch (Exception e) {
 			assertFail("Erro encontrado: Esperado ["+esperado+"], mas retornou ["+atual+"]");
+		}finally{
+			if (isError) {
+				Log.erro("E R R O "+"/"+"|"+""+"\\");
+				Log.erro("Esperado..: ["+esperado+"]");
+				Log.erro("Encontrado: ["+atual+"]");
+				Log.erro("R E P R O V A D O = :/");
+			}else{
+				Log.info("Resultado encontrado: ["+atual+"]"); 
+				Log.info("Resultado esperado..: ["+esperado+"]");
+			}
 		}
 	}
 	

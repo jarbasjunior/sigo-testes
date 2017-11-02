@@ -10,24 +10,26 @@ import java.util.Properties;
 */
 public abstract class Property {
 
-	public static       String IE64_DRIVE_PATH;
-	public static       String CHROME_DRIVE_PATH;
-	public static       String FIREFOX_DRIVE_PATH;
-	public static final String BROWSER_NAME;
-	public static final String URL;
-	public static final String LOGIN;
-	public static final String PASSWORD;
+	public static final  String URL;
+	public static final  String LOGIN;
+	public static final  String PASSWORD;
+	public static final  String BROWSER_NAME;
+	public static        String IE64_DRIVE_PATH;
+	public static        String CHROME_DRIVE_PATH;
+	public static        String FIREFOX_DRIVE_PATH;
+	public static        String PHANTOM_JS_DRIVE_PATH;
 	
 	private static final String PROPERTIES_FILE = "br/com/huetech/calcdescontos/config.properties";
 	
 	static{
-		IE64_DRIVE_PATH      = new File("").getAbsolutePath() + "\\src\\test\\resources\\IEDriverServer.exe";
-		CHROME_DRIVE_PATH    = new File("").getAbsolutePath() + "\\src\\test\\resources\\chromedriver.exe";
-		FIREFOX_DRIVE_PATH   = new File("").getAbsolutePath() + "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe";
-		BROWSER_NAME         = get("browser.name");
-		URL                  = get("site.address");
-		LOGIN                = get("login");
-		PASSWORD             = get("password");
+		IE64_DRIVE_PATH       = new File("").getAbsolutePath() + "\\src\\test\\resources\\IEDriverServer.exe";
+		CHROME_DRIVE_PATH     = new File("").getAbsolutePath() + "\\src\\test\\resources\\chromedriver.exe";
+		PHANTOM_JS_DRIVE_PATH = new File("").getAbsolutePath() + "\\src\\test\\resources\\phantomjs.exe";
+		FIREFOX_DRIVE_PATH    = new File("").getAbsolutePath() + "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe";
+		BROWSER_NAME          = get("browser.name");
+		URL                   = get("site.address");
+		LOGIN                 = get("login");
+		PASSWORD              = get("password");
 	}
 	
 	/**

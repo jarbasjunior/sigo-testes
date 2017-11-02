@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import br.com.huetech.calcdescontos.common.Property;
 import br.com.huetech.calcdescontos.common.Selenium;
-import br.com.huetech.calcdescontos.test.contato.TestTiposMensangensContatoIT;
+import br.com.huetech.calcdescontos.test.contato.TestPesquisaGoogleIT;
 /**
  * Classe que agrupa todas as classes de teste, funcionando com uma suíte de regressão.
  * @author Jarbas
@@ -16,7 +16,7 @@ import br.com.huetech.calcdescontos.test.contato.TestTiposMensangensContatoIT;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	TestTiposMensangensContatoIT.class,
+	TestPesquisaGoogleIT.class,
 })
 
 public class AllTests {

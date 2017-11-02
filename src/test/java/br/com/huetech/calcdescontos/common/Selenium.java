@@ -6,7 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 
 
@@ -31,8 +32,8 @@ public class Selenium {
 			
 			if (Browser.CHROME.equals(browser)) {
 				File file = new File(Property.CHROME_DRIVE_PATH);
+				driver    = new ChromeDriver();
 				System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-				driver = new ChromeDriver();
 				
 			} else if (Browser.IE.equals(browser)) {
 				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
@@ -45,6 +46,14 @@ public class Selenium {
 			} else  if (Browser.FIREFOX.equals(browser)){
 				//System.setProperty("webdriver.gecko.driver", "C:\\Users\\Jarbas Junior\\Git\\controleimoveis\\src\\test\\resources\\geckodriver.exe");
 				driver = new FirefoxDriver();
+				
+			}else  if (Browser.PHANTOMJS.equals(browser)){
+				DesiredCapabilities desinredCapabilities = DesiredCapabilities.phantomjs();
+				File file = new File(Property.PHANTOM_JS_DRIVE_PATH);
+				System.setProperty("phantomjs.binary.path", file.getAbsolutePath());
+				desinredCapabilities.setJavascriptEnabled(true);
+				desinredCapabilities.setCapability("takescreeshot", true);
+				driver = new PhantomJSDriver(desinredCapabilities);
 			}
 		}
 		return driver;

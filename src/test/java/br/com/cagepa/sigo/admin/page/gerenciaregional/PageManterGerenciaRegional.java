@@ -65,9 +65,9 @@ public class PageManterGerenciaRegional extends PageObjectGeneric<PageManterGere
 		Utils.assertEquals(nomeCadastroGerenciaRegional.getText(), "Cadastro de Gerências Regionais");
 		Log.info("Validando data da consulta...");
 		Utils.assertEquals(dataConsulta.getText(), Utils.getDataAtual());
-		Log.info("Validando nome [SIGLA] na tabela...");
+		Log.info("Validando nome [Sigla] na tabela...");
 		Utils.assertEquals(siglaTabela.getText(), "Sigla");
-		Log.info("Validando nome [NOME] na tabela...");
+		Log.info("Validando nome [Nome] na tabela...");
 		Utils.assertEquals(nomeTabela.getText(), "Nome");
 		Log.info("Validando sigla do retorno da consulta...");
 		Utils.assertEquals(siglaRetornoConsulta.getText(), "GRES");

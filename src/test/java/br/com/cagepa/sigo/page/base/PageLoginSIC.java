@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import br.com.cagepa.sigo.common.Property;
-import br.com.cagepa.sigo.common.Selenium;
+import br.com.cagepa.sigo.setup.Property;
+import br.com.cagepa.sigo.setup.Selenium;
 import br.com.cagepa.sigo.util.Log;
 
 public class PageLoginSIC extends PageObjectGeneric<PageLoginSIC> {
@@ -36,13 +36,13 @@ public class PageLoginSIC extends PageObjectGeneric<PageLoginSIC> {
 		Log.info("Informando senha...");
 		aguardarElementoVisivel(fieldPassword);
 		preencherCampo(fieldPassword, Property.PASSWORD);
-		btLogin.click();
+		clickBotao(btLogin);
 		
 		if (isVisibility(msgAlertaLogin)) {
 			Log.info("Confirmando alerta de login...");
 			aguardarElementoVisivel(btAlertOk);
-			alterarFrame(0);
-			click(btAlertOk);
+			selecionarFrameID(0);
+			clickBotao(btAlertOk);
 			Log.info("Login confirmado...");
 		}
 	}

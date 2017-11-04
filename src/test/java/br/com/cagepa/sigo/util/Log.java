@@ -48,8 +48,7 @@ public class Log {
 		info("Iniciando teste -> ["+nomeTeste+"]");
 	}
 	public static void msgFimTeste(String nomeTeste){
-		info("A P R O V A D O = o/");
-		info("Fim do teste -> ["+nomeTeste+"]");
+		info("Teste -> ["+nomeTeste+"] A P R O V A D O = o/");
 		info("=======================================================================================");
 	}
 }

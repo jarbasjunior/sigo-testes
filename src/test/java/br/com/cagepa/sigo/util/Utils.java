@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Random;
 
@@ -18,7 +21,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import br.com.cagepa.sigo.common.Selenium;
+import br.com.cagepa.sigo.setup.Selenium;
 
 /**
  * Classe com m�todos de apoio, que otimizam a codifica��o das classes de
@@ -79,8 +82,8 @@ public abstract class Utils {
 				Log.erro("Encontrado: ["+atual+"]");
 				Log.erro("R E P R O V A D O = :/");
 			}else{
-				Log.info("Resultado encontrado: ["+atual+"]"); 
 				Log.info("Resultado esperado..: ["+esperado+"]");
+				Log.info("Resultado encontrado: ["+atual+"]"); 
 			}
 		}
 	}
@@ -144,6 +147,47 @@ public abstract class Utils {
 					new File("C:\\Users\\Jarbas Junior\\Git-jarbas\\sigo-testes\\evidencias\\"+fileName+ data.getTime()+".jpeg"),true);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static String getAnoAnterior() {
+		try {
+			SimpleDateFormat formatDate = new SimpleDateFormat("ddMMyyyy");
+			Calendar calendar = new GregorianCalendar();
+			Date d1 = new Date();
+			calendar.setTime(d1);
+			calendar.add(Calendar.DATE, -600);
+			Date d2 = calendar.getTime();
+			return formatDate.format(d2);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public static String getDataAtual() {
+		try {
+			SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+			Calendar calendar = new GregorianCalendar();
+			Date data = new Date();
+			calendar.setTime(data);
+			return formatDate.format(data);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public static String getAno(int qtdAnosAtras) {
+		int dias = qtdAnosAtras * 365;
+		try {
+			SimpleDateFormat formatDate = new SimpleDateFormat("ddMMyyyy");
+			Calendar calendar = new GregorianCalendar();
+			Date d1 = new Date();
+			calendar.setTime(d1);
+			calendar.add(Calendar.DATE, -dias);
+			Date d2 = calendar.getTime();
+			return formatDate.format(d2);
+		} catch (Exception e) {
+			return null;
 		}
 	}
 	

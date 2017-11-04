@@ -1,4 +1,4 @@
-package br.com.cagepa.sigo.common;
+package br.com.cagepa.sigo.setup;
 
 import java.io.File;
 

@@ -4,8 +4,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 
-import br.com.cagepa.sigo.common.Property;
-import br.com.cagepa.sigo.common.Selenium;
+import br.com.cagepa.sigo.setup.Property;
+import br.com.cagepa.sigo.setup.Selenium;
 import br.com.cagepa.sigo.test.suite.AllTests;
 public class BaseTestCase {
 	

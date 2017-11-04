@@ -205,8 +205,8 @@ public abstract class PageObjectGeneric<T> {
 		alert.accept();
 	}
 	
-	public void alterarFrame() {
-		Selenium.getDriver().switchTo().frame(0);
+	public void alterarFrame(int idFrame) {
+		Selenium.getDriver().switchTo().frame(idFrame);
 	}
 
 	/**

@@ -41,7 +41,7 @@ public class PageLoginSIC extends PageObjectGeneric<PageLoginSIC> {
 		if (isVisibility(msgAlertaLogin)) {
 			Log.info("Confirmando alerta de login...");
 			aguardarElementoVisivel(btAlertOk);
-			alterarFrame();
+			alterarFrame(0);
 			click(btAlertOk);
 			Log.info("Login confirmado...");
 		}

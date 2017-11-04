@@ -14,15 +14,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import br.com.cagepa.sigo.common.Property;
-import br.com.cagepa.sigo.common.Selenium;
+import br.com.cagepa.sigo.setup.Property;
+import br.com.cagepa.sigo.setup.Selenium;
 import br.com.cagepa.sigo.util.Log;
 import br.com.cagepa.sigo.util.Utils;
 
 public abstract class PageObjectGeneric<T> {
 
 	private static final String URL_HUETECH = Property.URL;
-	private static final int LOAD_TIMEOUT = 10;
+	private static final int LOAD_TIMEOUT = 5;
 	private String windowHandleJanelaInicial;
 
 	public PageObjectGeneric() {
@@ -45,7 +45,7 @@ public abstract class PageObjectGeneric<T> {
 		}
 	}
 	
-	public void click(WebElement element) {
+	public void clickBotao(WebElement element) {
 		try {
 			aguardarElementoVisivel(element);
 			element.click();
@@ -128,12 +128,15 @@ public abstract class PageObjectGeneric<T> {
 		}
 	}
 	
-	public void esperarElementoDesaparecer(By elemento){
+	public void esperarElementoDesaparecer(By elemento, int qtdSegundos){
 		try {
 			int segundosEspera = 0;
-			while (isVisibility(elemento) || segundosEspera == 15) {
-				Utils.wait(2000);
+			while (isVisibility(elemento) || segundosEspera == qtdSegundos) {
+				Utils.wait(1000);
 				segundosEspera++;
+				if (!isVisibility(elemento)) {
+					break;
+				}
 			}
 		} catch (Exception e) {
 			Log.info("Erro");
@@ -162,6 +165,11 @@ public abstract class PageObjectGeneric<T> {
 	public void clicarBotaoDireito(WebElement elemento) {
 		Actions action = new Actions(Selenium.getDriver());
 		action.contextClick(elemento).build().perform();
+	}
+	
+	public void doubleclick(WebElement elemento) {
+		Actions action = new Actions(Selenium.getDriver());
+		action.doubleClick().build().perform();
 	}
 
 	public void moverCursorPara(WebElement elemento) {
@@ -205,8 +213,20 @@ public abstract class PageObjectGeneric<T> {
 		alert.accept();
 	}
 	
-	public void alterarFrame(int idFrame) {
+	public void selecionarFrameID(int idFrame) {
 		Selenium.getDriver().switchTo().frame(idFrame);
+	}
+	
+	public void selecionarFrameString(String stringFrame) {
+		Selenium.getDriver().switchTo().frame(stringFrame);
+	}
+	
+	public void selecionarFrameWebElement(WebElement element) {
+		Selenium.getDriver().switchTo().frame(element);
+	}
+	
+	public void retornarFrameAnterior() {
+		Selenium.getDriver().switchTo().defaultContent();
 	}
 
 	/**

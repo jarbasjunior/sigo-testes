@@ -1,4 +1,4 @@
-package br.com.cagepa.sigo.common;
+package br.com.cagepa.sigo.setup;
 
 /**
  * Classe para definir variável para identifição dos browsers

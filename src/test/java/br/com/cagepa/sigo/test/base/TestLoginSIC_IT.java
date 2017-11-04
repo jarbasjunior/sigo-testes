@@ -1,10 +1,9 @@
-package br.com.cagepa.sigo.test;
+package br.com.cagepa.sigo.test.base;
 
 import org.junit.Test;
 
+import br.com.cagepa.sigo.admin.page.sic.PageInicialSIC;
 import br.com.cagepa.sigo.page.base.PageLoginSIC;
-import br.com.cagepa.sigo.page.sic.PageInicialSIC;
-import br.com.cagepa.sigo.test.base.BaseTestCase;
 import br.com.cagepa.sigo.util.Log;
 
 /**
@@ -27,6 +26,4 @@ public class TestLoginSIC_IT extends BaseTestCase {
 		pageInicialSIC.verificaAutenticidadeUsuario();
 		Log.msgFimTeste(nomeTeste);
 	}
-	
-	//TODO gravar log em arquivo.
 }

@@ -9,9 +9,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.openqa.selenium.WebDriver;
 
-import br.com.cagepa.sigo.common.Property;
-import br.com.cagepa.sigo.common.Selenium;
-import br.com.cagepa.sigo.test.TestLoginSIC_IT;
+import br.com.cagepa.sigo.admin.test.TestGerenciaRegional_IT;
+import br.com.cagepa.sigo.setup.Property;
+import br.com.cagepa.sigo.setup.Selenium;
+import br.com.cagepa.sigo.test.base.TestLoginSIC_IT;
 import br.com.cagepa.sigo.util.Utils;
 /**
  * Classe que agrupa todas as classes de teste, funcionando com uma suíte de regressão.
@@ -20,10 +21,11 @@ import br.com.cagepa.sigo.util.Utils;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	TestLoginSIC_IT.class,
+	TestGerenciaRegional_IT.class,
 })
 
 public class AllTests {
+	
 protected static WebDriver driver;
 	
 	public static Boolean isAllTestsExecution = false;
@@ -35,7 +37,7 @@ protected static WebDriver driver;
 		inicio = Calendar.getInstance().getTime();
 		isAllTestsExecution = true;
 		driver = Selenium.getDriver();
-		driver.manage().window().maximize();
+		driver.manage().window();
 		driver.navigate().to(Property.URL);
 		TestLoginSIC_IT testLogin =  new TestLoginSIC_IT();
 		testLogin.loginSIC_ComSucesso();

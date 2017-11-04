@@ -1,12 +1,12 @@
-package br.com.huetech.calcdescontos.test.base;
+package br.com.cagepa.sigo.test.base;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 
-import br.com.huetech.calcdescontos.common.Property;
-import br.com.huetech.calcdescontos.common.Selenium;
-import br.com.huetech.calcdescontos.test.suite.AllTests;
+import br.com.cagepa.sigo.common.Property;
+import br.com.cagepa.sigo.common.Selenium;
+import br.com.cagepa.sigo.test.suite.AllTests;
 public class BaseTestCase {
 	
 	

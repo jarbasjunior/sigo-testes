@@ -1,4 +1,4 @@
-package br.com.huetech.calcdescontos.util;
+package br.com.cagepa.sigo.util;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import br.com.huetech.calcdescontos.common.Selenium;
+import br.com.cagepa.sigo.common.Selenium;
 
 /**
  * Classe com m�todos de apoio, que otimizam a codifica��o das classes de

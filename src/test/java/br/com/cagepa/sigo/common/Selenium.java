@@ -1,4 +1,4 @@
-package br.com.huetech.calcdescontos.common;
+package br.com.cagepa.sigo.common;
 
 import java.io.File;
 

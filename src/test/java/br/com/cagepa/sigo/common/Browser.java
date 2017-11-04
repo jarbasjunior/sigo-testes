@@ -1,4 +1,4 @@
-package br.com.huetech.calcdescontos.common;
+package br.com.cagepa.sigo.common;
 
 /**
  * Classe para definir variável para identifição dos browsers

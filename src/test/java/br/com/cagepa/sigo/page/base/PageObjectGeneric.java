@@ -1,4 +1,4 @@
-package br.com.huetech.calcdescontos.page.base;
+package br.com.cagepa.sigo.page.base;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -14,9 +14,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import br.com.huetech.calcdescontos.common.Property;
-import br.com.huetech.calcdescontos.common.Selenium;
-import br.com.huetech.calcdescontos.util.Log;
+import br.com.cagepa.sigo.common.Property;
+import br.com.cagepa.sigo.common.Selenium;
+import br.com.cagepa.sigo.util.Log;
+import br.com.cagepa.sigo.util.Utils;
 
 public abstract class PageObjectGeneric<T> {
 
@@ -126,6 +127,19 @@ public abstract class PageObjectGeneric<T> {
 			Assert.fail("Tempo excedido para aguardar elemento: " + element);
 		}
 	}
+	
+	public void esperarElementoDesaparecer(By elemento){
+		try {
+			int segundosEspera = 0;
+			while (isVisibility(elemento) || segundosEspera == 15) {
+				Utils.wait(2000);
+				segundosEspera++;
+			}
+		} catch (Exception e) {
+			Log.info("Erro");
+			Assert.fail("Error!");
+		}
+	}
 
 	public boolean isVisibility(WebElement elemento) {
 		try {
@@ -186,9 +200,13 @@ public abstract class PageObjectGeneric<T> {
 		this.windowHandleJanelaInicial = windowHandleJanelaInicial;
 	}
 
-	public void alertaSaidaDoSistema() {
+	public void confirmarAlerta() {
 		Alert alert = Selenium.getDriver().switchTo().alert();
 		alert.accept();
+	}
+	
+	public void alterarFrame() {
+		Selenium.getDriver().switchTo().frame(0);
 	}
 
 	/**

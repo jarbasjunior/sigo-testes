@@ -1,4 +1,4 @@
-package br.com.huetech.calcdescontos.util;
+package br.com.cagepa.sigo.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

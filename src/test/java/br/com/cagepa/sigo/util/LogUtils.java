@@ -1,4 +1,4 @@
-package br.com.huetech.calcdescontos.util;
+package br.com.cagepa.sigo.util;
 
 import org.apache.log4j.Logger;
 

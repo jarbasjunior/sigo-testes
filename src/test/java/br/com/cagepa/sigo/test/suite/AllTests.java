@@ -1,4 +1,4 @@
-package br.com.huetech.calcdescontos.test.suite;
+package br.com.cagepa.sigo.test.suite;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -6,9 +6,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.openqa.selenium.WebDriver;
 
-import br.com.huetech.calcdescontos.common.Property;
-import br.com.huetech.calcdescontos.common.Selenium;
-import br.com.huetech.calcdescontos.test.contato.TestPesquisaGoogleIT;
+import br.com.cagepa.sigo.common.Property;
+import br.com.cagepa.sigo.common.Selenium;
+import br.com.cagepa.sigo.test.TestLoginSIC_IT;
 /**
  * Classe que agrupa todas as classes de teste, funcionando com uma suíte de regressão.
  * @author Jarbas
@@ -16,7 +16,7 @@ import br.com.huetech.calcdescontos.test.contato.TestPesquisaGoogleIT;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	TestPesquisaGoogleIT.class,
+	TestLoginSIC_IT.class,
 })
 
 public class AllTests {

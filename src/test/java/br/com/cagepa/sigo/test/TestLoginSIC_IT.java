@@ -28,6 +28,5 @@ public class TestLoginSIC_IT extends BaseTestCase {
 		Log.msgFimTeste(nomeTeste);
 	}
 	
-	//TODO colocar tempo de execução do teste; 
 	//TODO gravar log em arquivo.
 }

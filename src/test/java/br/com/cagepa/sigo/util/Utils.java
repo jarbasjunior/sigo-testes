@@ -69,7 +69,7 @@ public abstract class Utils {
 		}
 	}
 	
-	public static void assertEquals(Object esperado, Object atual) {
+	public static void assertEquals(Object atual, Object esperado) {
 		try {
 			isError = !esperado.toString().equals(atual.toString());
 			Assert.assertEquals(esperado, atual);

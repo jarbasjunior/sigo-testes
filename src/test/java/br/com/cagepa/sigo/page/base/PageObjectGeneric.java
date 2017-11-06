@@ -1,5 +1,6 @@
 package br.com.cagepa.sigo.page.base;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import br.com.cagepa.sigo.setup.Property;
 import br.com.cagepa.sigo.setup.Selenium;
 import br.com.cagepa.sigo.util.Log;
 import br.com.cagepa.sigo.util.Utils;
+import br.com.cagepa.sigo.util.XLS_Utils;
 
 public abstract class PageObjectGeneric<T> {
 
@@ -217,7 +219,7 @@ public abstract class PageObjectGeneric<T> {
 		Selenium.getDriver().switchTo().frame(idFrame);
 	}
 	
-	public void selecionarFrameString(String stringFrame) {
+	public void selecionarFrameNameOrID(String stringFrame) {
 		Selenium.getDriver().switchTo().frame(stringFrame);
 	}
 	
@@ -240,4 +242,94 @@ public abstract class PageObjectGeneric<T> {
 	public WebElement getElement(By by) {
 		return Selenium.getDriver().findElement(by);
 	}
+	
+	public void pesquisaValidacaoEmMassa(WebElement enableField, WebElement field, 
+							             WebElement btLupa, By msgAguarde, //TODO ADICIONAR DEMAIS CAMPOS DE RETORNO DA PESQUISA 
+							             List<WebElement> camposDeValidacao) throws Exception{
+		int 	linha        = 0;
+		int 	coluna       = 0;
+		String  valorCelula  = null;
+		int     qtdRegistros = XLS_Utils.qtdRegistrosPlanilha();
+		
+		do {
+			Log.info("Habilitando para pesquisa...");
+			clickBotao(enableField);
+			Utils.wait(1000);
+			aguardarElementoVisivel(field);
+			Log.info("Campo para pesquisa habilitado.");
+			valorCelula = XLS_Utils.getDadosCelula(linha, coluna);
+			Log.info("Inserindo valor ["+valorCelula+"]...");
+			preencherCampo(field, valorCelula);
+			clickBotao(btLupa);
+			Log.info("Aguardando retorno da consulta...");
+			esperarElementoDesaparecer(msgAguarde, 15);
+			validarCamposDaPesquisa(camposDeValidacao); //TODO ADICIONAR DEMAIS CAMPOS DE RETORNO DA PESQUISA
+			qtdRegistros--;
+			linha++;
+		} while (qtdRegistros == 0);
+	}
+	
+	public void validarCamposDaPesquisa(List<WebElement> campos){
+		Log.info("Validando retorno da consulta");
+		// TODO - IMPLEMENTAR MÉTODO PARA VALIDAR RETORNO DA PESQUISA
+		
+	}
 }
+	
+//	public void preencherFormularioCadastro(List<WebElement> campos){
+//
+//		int              cont          = 1;
+//		int 			 linha         = 0;
+//		boolean          isRegistro    = true;
+//		String     		 valorCelula   = null;
+//		List<WebElement> qtdCampos     = campos;
+//
+//		// VERIFICA SE PLANILHA CONTÉM REGISTROS
+//		try {
+//			isRegistro = XLS_Utils.isProximaLinha(linha); 
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		aguardarElementoVisivel(botaoSalvar);
+//		Log.info("Iniciando preenchimento do formulário cliente...");
+//		
+//		// VARRE A PLANILHA ENQUANTO HOUVER REGISTROS
+//		while (isRegistro){
+//    		for (int coluna = 0; coluna < qtdCampos.size(); coluna++) {
+//    			try {
+//    				valorCelula = ExcelUtils.getDadosCelula(linha, coluna);
+//    				
+//    				Log.info("Inserindo o valor ["+valorCelula+"]");
+//
+//    				if (coluna == (qtdCampos.size()-1)) {
+//						selectElementByVisibleText(qtdCampos.get(coluna), valorCelula);
+//					}else
+//						preencherCampo(qtdCampos.get(coluna), valorCelula);
+//    			} catch (Exception e) {
+//    				Log.erro("Quantidade de registros inseridos ["+cont+"]");
+//    				Log.erro("Erro no preenchimento do valor ["+valorCelula+"], do elemento["+qtdCampos.get(coluna)+"]", e);
+//    			}
+//    		}
+//    		// SALVA O REGISTRO
+//    		botaoSalvar.click();
+//    		
+//    		//TESTE DE FEEDBACK
+//    		Utils.assertEquals("CLIENTE CADASTRADO COM SUCESSO!", msgSucesso.getText());
+//    		
+//    		linha++;
+//    		
+//    		// VERIFICA SE AINDA HÁ REGISTROS NA PRÓXIMA LINHA DA PLANILHA, SE HOUVER, ABRE NOVO FORMULÁRIO
+//    		try {
+//				isRegistro = ExcelUtils.isProximaLinha(linha);
+//				if (isRegistro) {
+//					botaoNovoCliente.click();
+//					aguardarElementoVisivel(qtdCampos.get(qtdCampos.size()-1));
+//				}
+//			} catch (Exception e) {
+//				Log.erro("Quantidade de registros inseridos ["+cont+"]");
+//				e.printStackTrace();
+//			} 
+//    	}
+//	}
+

@@ -34,14 +34,10 @@ public class PageInicialSIC extends PageObjectGeneric<PageInicialSIC> {
 	@FindBy(id = "item_1")
 	WebElement btGerenciaRegional;
 	
-	
-	public void verificaAutenticidadeUsuario(){
-		Log.info("Direcionando para pagina inicial SIC CAGEPA...");
-		aguardarElementoVisivel(imgCagepa);
-		Log.info("Verificando mensagem de acesso...");
-		Utils.assertEquals("Bem vindo, "+Property.USR, msgBoasVindas.getText());
-		Log.info("Verificando usuário de acesso...");
-		Utils.assertEquals(Property.EMAIL_USR, emailUsr.getText());
+	public void navegarParaCadastroGerenciaRegional() {
+		clicarBotaoSIGO();
+		abrirDropDownCadastrosSIGO();
+		abrirAbaGerenciaRegional();
 	}
 	
 	public void clicarBotaoSIGO(){
@@ -52,7 +48,7 @@ public class PageInicialSIC extends PageObjectGeneric<PageInicialSIC> {
 	
 	public void abrirDropDownCadastrosSIGO(){
 		Log.info("Alterando frame.");
-		selecionarFrameString(Property.FRAME_ID_ABA_CADASTRO);
+		selecionarFrameNameOrID(Property.FRAME_ID_ABA_CADASTRO);
 		Log.info("Frame alterada para aba cadastros.");
 		Log.info("Abrindo dropdown cadastros...");
 		moverCursorPara(dropDownCadastros);
@@ -63,4 +59,14 @@ public class PageInicialSIC extends PageObjectGeneric<PageInicialSIC> {
 		moverCursorPara(btGerenciaRegional);
 		clickBotao(btGerenciaRegional);
 	}
+	
+	public void verificaAutenticidadeUsuario(){
+		Log.info("Direcionando para pagina inicial SIC CAGEPA...");
+		aguardarElementoVisivel(imgCagepa);
+		Log.info("Verificando mensagem de acesso...");
+		Utils.assertEquals("Bem vindo, "+Property.USR, msgBoasVindas.getText());
+		Log.info("Verificando usuário de acesso...");
+		Utils.assertEquals(Property.EMAIL_USR, emailUsr.getText());
+	}
+
 }

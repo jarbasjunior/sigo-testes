@@ -110,7 +110,7 @@ public class XLS_Utils {
     	}
     }
     
-    //Realiza a leitura das células
+    //Realiza a leitura da célula
     public static String getDadosCelula(int numeroLinha, int numeroColuna) throws Exception{
     	try{
     		celula = planilha.getRow(numeroLinha).getCell(numeroColuna);
@@ -128,14 +128,19 @@ public class XLS_Utils {
     }
     
     public static boolean isProximaLinha(int linha) throws Exception{
-		
     	HSSFRow proximaLinha = planilha.getRow(linha);
     	if (proximaLinha == null) {
 			return false;
 		}
     	return true;
-    	
     }
     
+    public static int qtdRegistrosPlanilha() throws Exception{
+    	int qtdRegistros = 0;
+    	while (isProximaLinha(qtdRegistros)) {
+			qtdRegistros++;
+		}
+		return qtdRegistros;
+    	
+    }
 }
-

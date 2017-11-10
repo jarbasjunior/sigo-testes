@@ -48,7 +48,7 @@ public class TestGerenciaRegional_IT extends BaseTestCase {
 		Log.msgInicioTeste(nomeTeste);
 		XLS_Utils.getArquivoExcel(Property.PLANILHA_GERENCIA_REGIONAL);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
-		pageCadastrosGerenciasRegionais.pesquisarValidarGerenciaRegionalEmMassa();
+		pageCadastrosGerenciasRegionais.pesquisar_E_ValidarGerenciaRegionalEmMassa();
 		XLS_Utils.fecharArquivo();
 		Log.msgFimTeste(nomeTeste);
 	}

@@ -242,38 +242,6 @@ public abstract class PageObjectGeneric<T> {
 	public WebElement getElement(By by) {
 		return Selenium.getDriver().findElement(by);
 	}
-	
-	public void pesquisaValidacaoEmMassa(WebElement enableField, WebElement field, 
-							             WebElement btLupa, By msgAguarde, //TODO ADICIONAR DEMAIS CAMPOS DE RETORNO DA PESQUISA 
-							             List<WebElement> camposDeValidacao) throws Exception{
-		int 	linha        = 0;
-		int 	coluna       = 0;
-		String  valorCelula  = null;
-		int     qtdRegistros = XLS_Utils.qtdRegistrosPlanilha();
-		
-		do {
-			Log.info("Habilitando para pesquisa...");
-			clickBotao(enableField);
-			Utils.wait(1000);
-			aguardarElementoVisivel(field);
-			Log.info("Campo para pesquisa habilitado.");
-			valorCelula = XLS_Utils.getDadosCelula(linha, coluna);
-			Log.info("Inserindo valor ["+valorCelula+"]...");
-			preencherCampo(field, valorCelula);
-			clickBotao(btLupa);
-			Log.info("Aguardando retorno da consulta...");
-			esperarElementoDesaparecer(msgAguarde, 15);
-			validarCamposDaPesquisa(camposDeValidacao); //TODO ADICIONAR DEMAIS CAMPOS DE RETORNO DA PESQUISA
-			qtdRegistros--;
-			linha++;
-		} while (qtdRegistros == 0);
-	}
-	
-	public void validarCamposDaPesquisa(List<WebElement> campos){
-		Log.info("Validando retorno da consulta");
-		// TODO - IMPLEMENTAR MÉTODO PARA VALIDAR RETORNO DA PESQUISA
-		
-	}
 }
 	
 //	public void preencherFormularioCadastro(List<WebElement> campos){

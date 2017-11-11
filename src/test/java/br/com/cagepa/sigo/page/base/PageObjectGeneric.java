@@ -1,6 +1,5 @@
 package br.com.cagepa.sigo.page.base;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -19,7 +18,6 @@ import br.com.cagepa.sigo.setup.Property;
 import br.com.cagepa.sigo.setup.Selenium;
 import br.com.cagepa.sigo.util.Log;
 import br.com.cagepa.sigo.util.Utils;
-import br.com.cagepa.sigo.util.XLS_Utils;
 
 public abstract class PageObjectGeneric<T> {
 
@@ -136,7 +134,7 @@ public abstract class PageObjectGeneric<T> {
 			while (isVisibility(elemento) || segundosEspera == qtdSegundos) {
 				Utils.wait(1000);
 				segundosEspera++;
-				if (!isVisibility(elemento)) {
+				if (!isVisibility(elemento) || segundosEspera == qtdSegundos) {
 					break;
 				}
 			}

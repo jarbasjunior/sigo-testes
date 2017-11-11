@@ -72,18 +72,26 @@ public class PageCadastroGerenciasRegionais extends
 	public void pesquisar_E_ValidarGerenciaRegionalEmMassa() throws Exception {
 		validarFrameCadastroGerenciasRegionais();
 
-		int linha = 0;
-		int coluna = 0;
+		int linha    = 0;
+		int coluna   = 0;
+		int contador = 1;
 		String valorCelula = null;
-		int qtdRegistros = XLS_Utils.qtdRegistrosPlanilha();
+		
+		Log.info("Capturando quantidade de registros na planilha...");
+		int qtdRegistros        = XLS_Utils.qtdRegistrosPlanilha();
+		int registrosRestantes  = qtdRegistros;
+		Log.info("["+qtdRegistros+"] registros encontrados na planilha.");
 		
 		do {
 			
-			Log.info("Habilitando para pesquisa...");
+			Log.info("Habilitando campo de pesquisa...");
 			clickBotao(enableFieldGerenciaRegional);
 			Utils.wait(1000);
 			aguardarElementoVisivel(fieldGerenciaRegional);
 			Log.info("Campo para pesquisa habilitado.");
+			Log.info("-------------------------------------------------------------------------------------");
+			Log.info("Pesquisando e validando registro ["+contador+"/"+qtdRegistros+"]");
+			Log.info("-------------------------------------------------------------------------------------");
 			valorCelula = XLS_Utils.getDadosCelula(linha, coluna);
 			Log.info("Inserindo valor [" + valorCelula + "]...");
 			preencherCampo(fieldGerenciaRegional, valorCelula);
@@ -91,9 +99,13 @@ public class PageCadastroGerenciasRegionais extends
 			Log.info("Aguardando retorno da consulta...");
 			esperarElementoDesaparecer(msgAguarde, 15);
 			validarCamposDaPesquisa(camposDeValidacao(), linha, coluna); 
-			qtdRegistros--;
 			linha++;
-		} while (qtdRegistros == 0);
+			contador++;
+			registrosRestantes--;
+		} while (registrosRestantes > 0);
+		Log.info("Retornando para frame SIGO...");
+		retornarFrameAnterior();
+		Log.info("Retornado para frame SIGO...");
 	}
 
 	public void validarCamposDaPesquisa(List<WebElement> campos, int linha, int coluna) throws Exception {
@@ -125,9 +137,9 @@ public class PageCadastroGerenciasRegionais extends
 	// ===============================================================================================
 
 	/*
-	 * ==========================================================================
-	 * ===================== MÉTODOS DE PESQUISA E VALIDAÇÃO UNITÁRIA DE
-	 * GERENCIAS REGIONAIS
+	 * ===============================================================================================
+	 *  MÉTODOS DE PESQUISA E VALIDAÇÃO UNITÁRIA DE GERENCIAS REGIONAIS
+	 *  
 	 */
 	public void pesquisaUnitariaGerenciaRegional() {
 		validarFrameCadastroGerenciasRegionais();
@@ -156,11 +168,14 @@ public class PageCadastroGerenciasRegionais extends
 		Log.info("Validando nome do retorno da consulta...");
 		Utils.assertEquals(textoNomeRetornoConsulta.getText(),
 				"Gerência Regional das Espinharas");
+		Log.info("Retornando para frame SIGO...");
+		retornarFrameAnterior();
+		Log.info("Retornado para frame SIGO...");
 	}
 
 	/*
-	 * ==========================================================================
-	 * =====================
+	 * ===============================================================================================
+	 * 
 	 */
 
 	/*
@@ -169,8 +184,9 @@ public class PageCadastroGerenciasRegionais extends
 	public void validarFrameCadastroGerenciasRegionais() {
 		Log.info("Alterando frame...");
 		selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER);
-		Log.info("Frame alterada para aba manter.");
-		Log.info("Validando frame de cadastro de gerencia regional.");
+		clickBotao(titleCadastroGerenciaRegional);
+		Log.info("Frame alterada para aba Manter Gerencia Regional.");
+		Log.info("Validando frame de cadastro de Gerencia regional.");
 		Log.info("Validando titulo...");
 		Utils.assertEquals(titleCadastroGerenciaRegional.getText(),
 				"Cadastro de Gerências Regionais");

@@ -47,7 +47,7 @@ public class PageInicialSIC extends PageObjectGeneric<PageInicialSIC> {
 	}
 	
 	public void abrirDropDownCadastrosSIGO(){
-		Log.info("Alterando frame.");
+		Log.info("Alterando frame...");
 		selecionarFrameNameOrID(Property.FRAME_ID_ABA_CADASTRO);
 		Log.info("Frame alterada para aba cadastros.");
 		Log.info("Abrindo dropdown cadastros...");

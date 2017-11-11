@@ -19,8 +19,8 @@ public class XLS_Utils {
 	private static 		 HSSFCell 	   	  celula             = null;
 	private static 		 HSSFSheet 	  	  planilha           = null;
 	private static 		 HSSFWorkbook 	  excelWBook         = null;
-	private static       FileInputStream  arquivoEntradaXLS  = null;
-	private static       FileOutputStream arquivoSaidaXLS 	 = null;
+	private static       FileInputStream  arquivoLeituraXLS  = null;
+	private static       FileOutputStream arquivoEscritaXLS  = null;
 	private static final String       	  ARQUIVO_TESTE 	 = Property.ARQUIVO_TESTE_XLS;
 	private static final String           PATH_ARQUIVO_TESTE = Property.PATH_ARQUIVO_TESTE;
 
@@ -31,8 +31,8 @@ public class XLS_Utils {
 		
 		// Abre arquivo excel 
 		try {
-			arquivoEntradaXLS = new FileInputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
-			excelWBook        = new HSSFWorkbook(arquivoEntradaXLS);
+			arquivoLeituraXLS = new FileInputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
+			excelWBook        = new HSSFWorkbook(arquivoLeituraXLS);
 			Log.info("Arquivo encontrado em: ["+PATH_ARQUIVO_TESTE + ARQUIVO_TESTE+"]");
 		} catch (Exception e) {
 			Log.erro("["+ARQUIVO_TESTE+"] Diretorio nao encontrado!", e);
@@ -41,21 +41,35 @@ public class XLS_Utils {
 		// Define a planilha do arqruivo que será utilizada no teste
 		try {
 			planilha = excelWBook.getSheet(nomePlanilha);
-			Log.info("Planilha utlizada para teste -> ["+nomePlanilha+"]");
+			Log.info("Planilha utilizada para teste -> ["+nomePlanilha+"]");
 		} catch (Exception e) {
 			Log.erro("["+nomePlanilha+"] Planilha não encontrada no arquivo", e);
 		}
 	}
 
-	//	Fecha arquivo Excel
-	public static void fecharArquivo() {
+	//	Fecha arquivo de leitura .xls 
+	public static void fecharArquivoLeitura() {
 		
-		Log.info("Salvando e fechando arquivo ["+ARQUIVO_TESTE+"]...");
+		Log.info("Fechando arquivo de leitura ["+ARQUIVO_TESTE+"]...");
 		try {
-			arquivoSaidaXLS.close();
+			arquivoLeituraXLS.close();
+			Log.info("Arquivo ["+PATH_ARQUIVO_TESTE+ARQUIVO_TESTE+"] fechado.");
+		} catch (IOException e) {
+			Log.erro("Problema no fechamento do arquivo ["+PATH_ARQUIVO_TESTE+ARQUIVO_TESTE, e);
+			Log.fail("Problema no fechamento do arquivo ["+PATH_ARQUIVO_TESTE+ARQUIVO_TESTE);
+		}
+	}
+	
+	//	Fecha arquivo de escrita .xls 
+	public static void fecharArquivoEscrita() {
+		
+		Log.info("Salvando e fechando arquivo de escrita["+ARQUIVO_TESTE+"]...");
+		try {
+			arquivoEscritaXLS.close();
 			Log.info("Arquivo ["+ARQUIVO_TESTE+"] salvo em: ["+PATH_ARQUIVO_TESTE+"]");
 		} catch (IOException e) {
-			Log.erro("Problema no fechamento do arquivo ["+PATH_ARQUIVO_TESTE+ARQUIVO_TESTE);
+			Log.erro("Problema no fechamento do arquivo ["+PATH_ARQUIVO_TESTE+ARQUIVO_TESTE, e);
+			Log.fail("Problema no fechamento do arquivo ["+PATH_ARQUIVO_TESTE+ARQUIVO_TESTE);
 		}
 	}
 	
@@ -101,8 +115,8 @@ public class XLS_Utils {
 			for (int coluna = 0; coluna < qtdColunas; coluna++) {
 				try {
 					setDadosCelula(dados.get(coluna), linha, coluna);
-					arquivoSaidaXLS = new FileOutputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
-					excelWBook.write(arquivoSaidaXLS);
+					arquivoEscritaXLS = new FileOutputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
+					excelWBook.write(arquivoEscritaXLS);
 				} catch (Exception e) {
 					Log.erro("Erro na inserção do valor ["+dados.get(linha)+"]", e);
 				}

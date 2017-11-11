@@ -32,7 +32,7 @@ public class TestGerenciaRegional_IT extends BaseTestCase {
 		Log.msgFimTeste(nomeTeste);
 	}*/
 	
-	/*@Test
+	@Test
 	public void pesquisarGerenciaRegionalComSucesso(){
 		nomeTeste = "pesquisarGerenciaRegionalComSucesso";
 		Log.msgInicioTeste(nomeTeste);
@@ -40,16 +40,16 @@ public class TestGerenciaRegional_IT extends BaseTestCase {
 		pageCadastrosGerenciasRegionais.pesquisaUnitariaGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validacaoUnitariaPesquisaGerenciaRegional();
 		Log.msgFimTeste(nomeTeste);
-	}*/
+	}
 	
 	@Test
 	public void pesquisarGerenciaRegionalEmMassaComSucesso() throws Exception{
-		nomeTeste = "pesquisarGerenciaRegionalComSucesso";
+		nomeTeste = "pesquisarGerenciaRegionalEmMassaComSucesso";
 		Log.msgInicioTeste(nomeTeste);
 		XLS_Utils.getArquivoExcel(Property.PLANILHA_GERENCIA_REGIONAL);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.pesquisar_E_ValidarGerenciaRegionalEmMassa();
-		XLS_Utils.fecharArquivo();
+		XLS_Utils.fecharArquivoLeitura();
 		Log.msgFimTeste(nomeTeste);
 	}
 }

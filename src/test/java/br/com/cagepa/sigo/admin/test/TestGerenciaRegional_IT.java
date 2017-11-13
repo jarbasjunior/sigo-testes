@@ -5,10 +5,8 @@ import org.junit.Test;
 import br.com.cagepa.sigo.admin.page.gerenciaregional.PageCadastroGerenciasRegionais;
 import br.com.cagepa.sigo.admin.page.gerenciaregional.PageInclusaoGerenciaRegional;
 import br.com.cagepa.sigo.admin.page.sic.PageInicialSIC;
-import br.com.cagepa.sigo.setup.Property;
 import br.com.cagepa.sigo.test.base.BaseTestCase;
 import br.com.cagepa.sigo.util.Log;
-import br.com.cagepa.sigo.util.XLS_Utils;
 
 /**
  * 
@@ -23,33 +21,35 @@ public class TestGerenciaRegional_IT extends BaseTestCase {
 	PageInclusaoGerenciaRegional   pageInclusaoGerenciaRegional    = new PageInclusaoGerenciaRegional();   
 	PageCadastroGerenciasRegionais pageCadastrosGerenciasRegionais = new PageCadastroGerenciasRegionais();
 	
-	/*@Test
-	public void incluirGerenciaRegionalComSucesso(){
-		nomeTeste = "incluirGerenciaRegionalComSucesso";
-		Log.msgInicioTeste(nomeTeste);
-		pageInicialSIC.navegarParaCadastroGerenciaRegional();
-		pageInclusaoGerenciaRegional.incluirGerenciaRegionalComSucesso();
-		Log.msgFimTeste(nomeTeste);
-	}*/
-	
 	@Test
-	public void pesquisarGerenciaRegionalComSucesso(){
-		nomeTeste = "pesquisarGerenciaRegionalComSucesso";
+	public void tentarIncluirGerenciaRegionalSemSucesso(){
+		nomeTeste = "tentarIncluirGerenciaRegionalSemSucesso";
 		Log.msgInicioTeste(nomeTeste);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
-		pageCadastrosGerenciasRegionais.pesquisaUnitariaGerenciaRegional();
-		pageCadastrosGerenciasRegionais.validacaoUnitariaPesquisaGerenciaRegional();
+		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
+		pageCadastrosGerenciasRegionais.navegarParaInclusaoNovaGerenciaRegional();
+		pageInclusaoGerenciaRegional.incluirGerenciaRegionalEmMassa();
+//		pageInicialSIC.navegarParaCadastroGerenciaRegional();
+//		pageCadastrosGerenciasRegionais.pesquisar_E_ValidarGerenciaRegionalEmMassa();
 		Log.msgFimTeste(nomeTeste);
 	}
 	
-	@Test
-	public void pesquisarGerenciaRegionalEmMassaComSucesso() throws Exception{
-		nomeTeste = "pesquisarGerenciaRegionalEmMassaComSucesso";
-		Log.msgInicioTeste(nomeTeste);
-		XLS_Utils.getArquivoExcel(Property.PLANILHA_GERENCIA_REGIONAL);
-		pageInicialSIC.navegarParaCadastroGerenciaRegional();
-		pageCadastrosGerenciasRegionais.pesquisar_E_ValidarGerenciaRegionalEmMassa();
-		XLS_Utils.fecharArquivoLeitura();
-		Log.msgFimTeste(nomeTeste);
-	}
+//	@Test
+//	public void pesquisarGerenciaRegionalComSucesso(){
+//		nomeTeste = "pesquisarGerenciaRegionalComSucesso";
+//		Log.msgInicioTeste(nomeTeste);
+//		pageInicialSIC.navegarParaCadastroGerenciaRegional();
+//		pageCadastrosGerenciasRegionais.pesquisaUnitariaGerenciaRegional();
+//		pageCadastrosGerenciasRegionais.validacaoUnitariaPesquisaGerenciaRegional();
+//		Log.msgFimTeste(nomeTeste);
+//	}
+//	
+//	@Test
+//	public void pesquisarGerenciaRegionalEmMassaComSucesso() {
+//		nomeTeste = "pesquisarGerenciaRegionalEmMassaComSucesso";
+//		Log.msgInicioTeste(nomeTeste);
+//		pageInicialSIC.navegarParaCadastroGerenciaRegional();
+//		pageCadastrosGerenciasRegionais.pesquisar_E_ValidarGerenciaRegionalEmMassa();
+//		Log.msgFimTeste(nomeTeste);
+//	}
 }

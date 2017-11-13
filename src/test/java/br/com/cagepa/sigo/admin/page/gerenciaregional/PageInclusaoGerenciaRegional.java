@@ -1,5 +1,6 @@
 package br.com.cagepa.sigo.admin.page.gerenciaregional;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,6 +10,7 @@ import br.com.cagepa.sigo.setup.Property;
 import br.com.cagepa.sigo.setup.Selenium;
 import br.com.cagepa.sigo.util.Log;
 import br.com.cagepa.sigo.util.Utils;
+import br.com.cagepa.sigo.util.XLS_Utils;
 
 public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusaoGerenciaRegional> {
 
@@ -40,22 +42,114 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 	@FindBy(id = "id_sc_field_nome")
 	WebElement fieldNome;
 	
+	@FindBy(id = "id_read_off_sigla")
+	WebElement enablefieldSigla;
+	
+	@FindBy(id = "id_read_off_nome")
+	WebElement enablefieldNome;
+	
 	@FindBy(xpath = "//*[@id='main_table_form']/tbody/tr/td/div/table/tbody/tr[4]/td/span")
 	WebElement fraseObrigatoriedade;
+	
+	@FindBy(id = "resposta_cadastro")
+	WebElement msgFeedback;
+	
+	@FindBy(name = "Bmens")
+	WebElement btOk;
+	
+	@FindBy(id = "sc_b_new_t")
+	WebElement btNovo;
 
-	public void incluirGerenciaRegionalComSucesso(){
+	public void incluirGerenciaRegionalEmMassa(){
 		validarFrameInclusaoGerenciaRegional();
+		
+		try {
+			XLS_Utils.getArquivoExcel(Property.PLANILHA_GERENCIA_REGIONAL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int    linha         = 0;
+		int    coluna        = 0;
+		int    contador      = 1;
+		String nomeGerencia  = null;
+		String siglaGerencia = null;
+		int    qtdRegistros  = 0;
+		
+		Log.info("Capturando quantidade de registros na planilha...");
+		try {
+			qtdRegistros = XLS_Utils.qtdRegistrosPlanilha();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int registrosRestantes  = qtdRegistros;
+		Log.info("["+qtdRegistros+"] registros encontrados na planilha.");
+		
+		do {
+			
+			try {
+				siglaGerencia = XLS_Utils.getDadosCelula(linha, coluna);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				nomeGerencia = XLS_Utils.getDadosCelula(linha, coluna+1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			Log.info("-------------------------------------------------------------------------------------");
+			Log.info("Inclusao de registro ["+contador+"/"+qtdRegistros+"]...");
+			Log.info("-------------------------------------------------------------------------------------");
+			Log.info("Iniciando preenchimento de inclusão de gerência regional...");
+			
+			Log.info("Habilitando campo sigla...");
+			clickBotao(enablefieldSigla);
+			Log.info("Campo sigla habilitado.");
+			aguardarElementoVisivel(fieldSigla);
+			Log.info("Preenchendo campo sigla com valor ["+siglaGerencia+"]...");
+			preencherCampo(fieldSigla, siglaGerencia);
+			Log.info("Campo [Sigla] preenchido.");
+			
+			Log.info("Habilitando campo nome...");
+			clickBotao(enablefieldNome);
+			Log.info("Campo [Nome] habilitado.");
+			aguardarElementoVisivel(fieldNome);
+			Log.info("Preenchendo campo [Nome] com valor ["+nomeGerencia+"]...");
+			preencherCampo(fieldNome, nomeGerencia);
+			Log.info("Campo [Nome] preenchido.");
+			
+			Log.info("Clicando no botao incluir...");
+			clickBotao(btIncluir);
+			
+			Log.info("Confirmando pop-up de inclusao...");
+			confirmarAlerta();
+			
+			Log.info("Validando mensagem de feedback de ERRO na inclusao de gerencia regional...");
+			
+			
+			linha++;
+			contador++;
+			registrosRestantes--;
+			
+			if (registrosRestantes > 0) {
+				clickBotao(btNovo);
+			}
+			
+		} while (registrosRestantes > 0);
 	}
 	
-	
-	
-	
-	
-	
+	/*Log.info("Validando mensagem de feedback de inclusao de gerencia...");
+	Utils.assertEquals(msgFeedback.getText(), "Gerência Regional cadastrada com sucesso!");
+	Log.info("Confirmando mensagem de sucesso...");
+	clickBotao(btOk);*/
+		
 	public void validarFrameInclusaoGerenciaRegional(){
-		Log.info("Alterando frame...");
-		selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER);
-		Log.info("Frame alterada para aba manter.");
+		By frameGerenciaRegional = By.name(Property.FRAME_NAME_ABA_MANTER);
+		if (isVisibility(frameGerenciaRegional)) {
+			Log.info("Alterando frame...");
+			selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER);
+			Log.info("Frame alterada para aba manter.");
+		}
 		Log.info("Validando frame de inclusao de gerencia regional.");
 		Log.info("Validando titulo...");
 		Utils.assertEquals(titleInclusaoGerenciaRegional.getText(), "Inclusão - Gerência Regional");

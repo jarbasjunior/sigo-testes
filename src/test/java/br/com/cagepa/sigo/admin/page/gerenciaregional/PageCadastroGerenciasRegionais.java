@@ -68,17 +68,33 @@ public class PageCadastroGerenciasRegionais extends
 	 *  MÉTODOS DE PESQUISA E VALIDAÇÃO EM MASSA DE GERENCIAS REGIONAIS
 	 *  
 	 */
+	
+	public void navegarParaInclusaoNovaGerenciaRegional(){
+		Log.info("Navegando para tela de inclusão de nova gerencia regional...");
+		clickBotao(btNovaGerencia);
+	}
 
-	public void pesquisar_E_ValidarGerenciaRegionalEmMassa() throws Exception {
+	public void pesquisar_E_ValidarGerenciaRegionalEmMassa() {
+		
+		try {
+			XLS_Utils.getArquivoExcel(Property.PLANILHA_GERENCIA_REGIONAL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		validarFrameCadastroGerenciasRegionais();
 
-		int linha    = 0;
-		int coluna   = 0;
-		int contador = 1;
-		String valorCelula = null;
+		int    linha        = 0;
+		int    coluna       = 0;
+		int    contador     = 1;
+		String valorCelula  = null;
+		int    qtdRegistros = 0;
 		
 		Log.info("Capturando quantidade de registros na planilha...");
-		int qtdRegistros        = XLS_Utils.qtdRegistrosPlanilha();
+		try {
+			qtdRegistros = XLS_Utils.qtdRegistrosPlanilha();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		int registrosRestantes  = qtdRegistros;
 		Log.info("["+qtdRegistros+"] registros encontrados na planilha.");
 		
@@ -86,13 +102,17 @@ public class PageCadastroGerenciasRegionais extends
 			
 			Log.info("Habilitando campo de pesquisa...");
 			clickBotao(enableFieldGerenciaRegional);
-			Utils.wait(1000);
+			Utils.wait(500);
 			aguardarElementoVisivel(fieldGerenciaRegional);
 			Log.info("Campo para pesquisa habilitado.");
 			Log.info("-------------------------------------------------------------------------------------");
-			Log.info("Pesquisando e validando registro ["+contador+"/"+qtdRegistros+"]");
+			Log.info("Pesquisando e validando registro ["+contador+"/"+qtdRegistros+"]...");
 			Log.info("-------------------------------------------------------------------------------------");
-			valorCelula = XLS_Utils.getDadosCelula(linha, coluna);
+			try {
+				valorCelula = XLS_Utils.getDadosCelula(linha, coluna);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			Log.info("Inserindo valor [" + valorCelula + "]...");
 			preencherCampo(fieldGerenciaRegional, valorCelula);
 			clickBotao(btLupaGerenciaRegional);
@@ -103,14 +123,27 @@ public class PageCadastroGerenciasRegionais extends
 			contador++;
 			registrosRestantes--;
 		} while (registrosRestantes > 0);
+		
 		Log.info("Retornando para frame SIGO...");
 		retornarFrameAnterior();
 		Log.info("Retornado para frame SIGO...");
+		XLS_Utils.fecharArquivoLeitura();
 	}
 
-	public void validarCamposDaPesquisa(List<WebElement> campos, int linha, int coluna) throws Exception {
-		String textoSiglaRetornoConsulta = XLS_Utils.getDadosCelula(linha, coluna);
-		String textoNomeRetornoConsulta  = XLS_Utils.getDadosCelula(linha, coluna+1);
+	public void validarCamposDaPesquisa(List<WebElement> campos, int linha, int coluna) {
+		String textoNomeRetornoConsulta  = null;
+		String textoSiglaRetornoConsulta = null; 
+		try {
+			textoSiglaRetornoConsulta = XLS_Utils.getDadosCelula(linha, coluna);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			textoNomeRetornoConsulta = XLS_Utils.getDadosCelula(linha, coluna+1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		Log.info("Validando retorno da consulta");
 		Utils.assertEquals(campos.get(0).getText(), Property.TELA_TITULO_CADASTRO_GERENCIA_REGIONAL);
 		Utils.assertEquals(campos.get(1).getText(), Property.TELA_SIGLA);

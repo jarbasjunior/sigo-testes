@@ -40,6 +40,9 @@ public class Log {
 	public static void mensagemErro(String pMensagemFinal) {
 		aLogger.error(pMensagemFinal);
 	}
+	public static void fail(String pMensagemFinal) {
+		aLogger.fatal(pMensagemFinal);
+	}
 	public static void mensagemErro(String pMensagemFinal,Exception e) {
 		aLogger.error(pMensagemFinal,e);
 	}

@@ -134,7 +134,7 @@ public abstract class PageObjectGeneric<T> {
 			while (isVisibility(elemento) || segundosEspera == qtdSegundos) {
 				Utils.wait(1000);
 				segundosEspera++;
-				if (!isVisibility(elemento)) {
+				if (!isVisibility(elemento) || segundosEspera == qtdSegundos) {
 					break;
 				}
 			}
@@ -217,7 +217,7 @@ public abstract class PageObjectGeneric<T> {
 		Selenium.getDriver().switchTo().frame(idFrame);
 	}
 	
-	public void selecionarFrameString(String stringFrame) {
+	public void selecionarFrameNameOrID(String stringFrame) {
 		Selenium.getDriver().switchTo().frame(stringFrame);
 	}
 	
@@ -226,7 +226,9 @@ public abstract class PageObjectGeneric<T> {
 	}
 	
 	public void retornarFrameAnterior() {
+		Log.info("Retornando para frame SIGO...");
 		Selenium.getDriver().switchTo().defaultContent();
+		Log.info("Retornado para frame SIGO...");
 	}
 
 	/**

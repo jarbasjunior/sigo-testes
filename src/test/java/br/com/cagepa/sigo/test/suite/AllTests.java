@@ -28,9 +28,9 @@ public class AllTests {
 	
 protected static WebDriver driver;
 	
+	public static Date    fim    			  = null;
+	public static Date    inicio 			  = null;
 	public static Boolean isAllTestsExecution = false;
-	public static Date    inicio = null;
-	public static Date    fim    = null;
 	
 	@BeforeClass
 	public static void beforeClass() throws Exception {
@@ -39,7 +39,7 @@ protected static WebDriver driver;
 		driver = Selenium.getDriver();
 		driver.manage().window();
 		driver.navigate().to(Property.URL);
-		TestLoginSIC_IT testLogin =  new TestLoginSIC_IT();
+		TestLoginSIC_IT testLogin = new TestLoginSIC_IT();
 		testLogin.loginSIC_ComSucesso();
 	}
 

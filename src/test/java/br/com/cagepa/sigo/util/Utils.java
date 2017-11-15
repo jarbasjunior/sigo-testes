@@ -69,7 +69,7 @@ public abstract class Utils {
 		}
 	}
 	
-	public static void assertEquals(Object esperado, Object atual) {
+	public static void assertEquals(Object atual, Object esperado) {
 		try {
 			isError = !esperado.toString().equals(atual.toString());
 			Assert.assertEquals(esperado, atual);
@@ -112,6 +112,17 @@ public abstract class Utils {
 		nf.setMinimumFractionDigits(2);
 		nf.setMaximumFractionDigits(2);
 		return nf.format(value).replace(",","");
+	}
+	
+	public static String geraSigla(int tamanhoSigla){
+		Random random = new Random();
+		char[] letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < tamanhoSigla; i++) {
+			int ch = random.nextInt (letras.length);
+		    sb.append (letras [ch]);
+		}    
+		return sb.toString();    
 	}
 	
 	public static int geraNumeroEntreIntervalo(int min, int max){

@@ -174,22 +174,21 @@ public class PageCadastroGerenciasRegionais extends
 	 *  MÉTODOS DE PESQUISA E VALIDAÇÃO UNITÁRIA DE GERENCIAS REGIONAIS
 	 *  
 	 */
-	public void pesquisaUnitariaGerenciaRegional() {
+	public void pesquisaUnitariaGerenciaRegional(String sigla) {
 		validarFrameCadastroGerenciasRegionais();
 		clickBotao(enableFieldGerenciaRegional);
 		Utils.wait(1000);
 		aguardarElementoVisivel(fieldGerenciaRegional);
-		Log.info("Inserindo valor [GRES] no campo de pesquisa...");
-		preencherCampo(fieldGerenciaRegional, "GRES");
+		Log.info("Inserindo valor ["+sigla+"] no campo de pesquisa...");
+		preencherCampo(fieldGerenciaRegional, sigla);
 		clickBotao(btLupaGerenciaRegional);
 		Log.info("Aguardando retorno da pesquisa...");
 	}
 
-	public void validacaoUnitariaPesquisaGerenciaRegional() {
+	public void validacaoUnitariaPesquisaGerenciaRegional(String sigla, String nome) {
 		esperarElementoDesaparecer(msgAguarde, 15);
 		Log.info("Validando nome da gerencia regional...");
-		Utils.assertEquals(titleCadastroGerenciaRegional.getText(),
-				"Cadastro de Gerências Regionais");
+		Utils.assertEquals(titleCadastroGerenciaRegional.getText(),	"Cadastro de Gerências Regionais");
 		Log.info("Validando data da consulta...");
 		Utils.assertEquals(textoDataConsulta.getText(), Utils.getDataAtual());
 		Log.info("Validando nome [Sigla] na tabela...");
@@ -197,13 +196,10 @@ public class PageCadastroGerenciasRegionais extends
 		Log.info("Validando nome [Nome] na tabela...");
 		Utils.assertEquals(textoNomeTabela.getText(), "Nome");
 		Log.info("Validando sigla do retorno da consulta...");
-		Utils.assertEquals(textoSiglaRetornoConsulta.getText(), "GRES");
+		Utils.assertEquals(textoSiglaRetornoConsulta.getText(), sigla);
 		Log.info("Validando nome do retorno da consulta...");
-		Utils.assertEquals(textoNomeRetornoConsulta.getText(),
-				"Gerência Regional das Espinharas");
-		Log.info("Retornando para frame SIGO...");
+		Utils.assertEquals(textoNomeRetornoConsulta.getText(), nome);
 		retornarFrameAnterior();
-		Log.info("Retornado para frame SIGO...");
 	}
 
 	/*

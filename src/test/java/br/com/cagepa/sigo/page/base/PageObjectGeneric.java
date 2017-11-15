@@ -226,7 +226,9 @@ public abstract class PageObjectGeneric<T> {
 	}
 	
 	public void retornarFrameAnterior() {
+		Log.info("Retornando para frame SIGO...");
 		Selenium.getDriver().switchTo().defaultContent();
+		Log.info("Retornado para frame SIGO...");
 	}
 
 	/**

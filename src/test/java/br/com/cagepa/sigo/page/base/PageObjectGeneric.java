@@ -130,11 +130,16 @@ public abstract class PageObjectGeneric<T> {
 	
 	public void esperarElementoDesaparecer(By elemento, int qtdSegundos){
 		try {
-			int segundosEspera = 0;
+			int segundosEspera      = 0;
+			int segundosRegressivos = qtdSegundos;
 			while (isVisibility(elemento) || segundosEspera == qtdSegundos) {
+				Log.info("Aguardando mensagem de espera desaparecer");
 				Utils.wait(1000);
 				segundosEspera++;
+				Log.info("Tempo de espera restante ["+segundosRegressivos+"]");
+				segundosRegressivos--;
 				if (!isVisibility(elemento) || segundosEspera == qtdSegundos) {
+					Log.info("Mensagem de espera removida");
 					break;
 				}
 			}

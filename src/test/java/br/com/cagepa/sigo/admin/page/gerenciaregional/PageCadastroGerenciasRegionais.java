@@ -60,6 +60,12 @@ public class PageCadastroGerenciasRegionais extends
 
 	@FindBy(id = "id_sc_field_nome_1")
 	WebElement textoNomeRetornoConsulta;
+	
+	@FindBy(id = "id_img_bedit")
+	WebElement btEditarCadastroRegional;
+	
+	@FindBy(id = "sc_grid_body")
+	WebElement msgRegistroNaoEncontrado;
 
 	By msgAguarde = By.xpath("html/body/div[5]/div/span/img");
 
@@ -72,6 +78,13 @@ public class PageCadastroGerenciasRegionais extends
 	public void navegarParaInclusaoNovaGerenciaRegional(){
 		Log.info("Navegando para tela de inclusão de nova gerencia regional...");
 		clickBotao(btNovaGerencia);
+	}
+	
+	public void navegarParaAtualizacaoGerenciaRegional(){
+		Log.info("Navegando para tela de atualizacao de gerencia regional...");
+		esperarElementoDesaparecer(msgAguarde, 10);
+		clickBotao(btEditarCadastroRegional);
+		esperarElementoDesaparecer(msgAguarde, 10);
 	}
 
 	public void pesquisar_E_ValidarGerenciaRegionalEmMassa() {
@@ -176,6 +189,19 @@ public class PageCadastroGerenciasRegionais extends
 	 */
 	public void pesquisaUnitariaGerenciaRegional(String sigla) {
 		validarFrameCadastroGerenciasRegionais();
+		Log.info("Habilitando o campo de pesquisa...");
+		clickBotao(enableFieldGerenciaRegional);
+		Log.info("Campo de pesquisas habilitado.");
+		Utils.wait(1000);
+		aguardarElementoVisivel(fieldGerenciaRegional);
+		Log.info("Inserindo valor ["+sigla+"] no campo de pesquisa...");
+		preencherCampo(fieldGerenciaRegional, sigla);
+		clickBotao(btLupaGerenciaRegional);
+		Log.info("Aguardando retorno da pesquisa...");
+	}
+	
+	public void pesquisaUnitariaGerenciaRegionalSemSucesso(String sigla) {
+		validarFrameCadastroGerenciasRegionais();
 		clickBotao(enableFieldGerenciaRegional);
 		Utils.wait(1000);
 		aguardarElementoVisivel(fieldGerenciaRegional);
@@ -185,7 +211,7 @@ public class PageCadastroGerenciasRegionais extends
 		Log.info("Aguardando retorno da pesquisa...");
 	}
 
-	public void validacaoUnitariaPesquisaGerenciaRegional(String sigla, String nome) {
+	public void validacaoUnitariaPesquisaGerenciaRegionalComSucesso(String sigla, String nome) {
 		esperarElementoDesaparecer(msgAguarde, 15);
 		Log.info("Validando nome da gerencia regional...");
 		Utils.assertEquals(titleCadastroGerenciaRegional.getText(),	"Cadastro de Gerências Regionais");
@@ -199,6 +225,15 @@ public class PageCadastroGerenciasRegionais extends
 		Utils.assertEquals(textoSiglaRetornoConsulta.getText(), sigla);
 		Log.info("Validando nome do retorno da consulta...");
 		Utils.assertEquals(textoNomeRetornoConsulta.getText(), nome);
+		retornarFrameAnterior();
+	}
+	
+	public void validacaoUnitariaPesquisaGerenciaRegionalSemSucesso(String sigla) {
+		esperarElementoDesaparecer(msgAguarde, 15);
+		Utils.assertEquals(titleCadastroGerenciaRegional.getText(),	"Cadastro de Gerências Regionais");
+		Utils.assertEquals(textoDataConsulta.getText(), Utils.getDataAtual());
+		Log.info("Validando mensagem de registro nao encontrado...");
+		Utils.assertEquals(msgRegistroNaoEncontrado.getText(), "Registros não encontrados");
 		retornarFrameAnterior();
 	}
 

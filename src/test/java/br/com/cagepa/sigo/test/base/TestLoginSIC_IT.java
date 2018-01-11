@@ -14,16 +14,14 @@ import br.com.cagepa.sigo.util.Log;
  * */
 public class TestLoginSIC_IT extends BaseTestCase {
 
-	String         nomeTeste      = null;
 	PageLoginSIC   pageLoginSIC   = new PageLoginSIC();
 	PageInicialSIC pageInicialSIC = new PageInicialSIC();
 	
 	@Test
 	public void loginSIC_ComSucesso(){
-		nomeTeste = "loginSIC_ComSucesso";
-		Log.msgInicioTeste(nomeTeste);
+		Log.info("Realizando login no sistema SIGO...");
 		pageLoginSIC.realizarLoginSIC();
 		pageInicialSIC.verificaAutenticidadeUsuario();
-		Log.msgFimTeste(nomeTeste);
+		Log.info("Login efetuado com sucesso!");
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import br.com.cagepa.sigo.admin.page.gerenciaregional.PageAtualizacaoGerenciaRegional;
 import br.com.cagepa.sigo.admin.page.gerenciaregional.PageCadastroGerenciasRegionais;
 import br.com.cagepa.sigo.admin.page.gerenciaregional.PageInclusaoGerenciaRegional;
 import br.com.cagepa.sigo.admin.page.sic.PageInicialSIC;
@@ -19,23 +20,21 @@ import br.com.cagepa.sigo.util.Log;
  * */
 public class TestGerenciaRegional_IT extends BaseTestCase {
 
-	String         			       nomeTeste      				   = null;
-	PageInicialSIC 			       pageInicialSIC 				   = new PageInicialSIC();
-	PageInclusaoGerenciaRegional   pageInclusaoGerenciaRegional    = new PageInclusaoGerenciaRegional();   
-	PageCadastroGerenciasRegionais pageCadastrosGerenciasRegionais = new PageCadastroGerenciasRegionais();
+	PageInicialSIC 			        pageInicialSIC 				    = new PageInicialSIC();
+	PageInclusaoGerenciaRegional    pageInclusaoGerenciaRegional    = new PageInclusaoGerenciaRegional();   
+	PageCadastroGerenciasRegionais  pageCadastrosGerenciasRegionais = new PageCadastroGerenciasRegionais();
+	PageAtualizacaoGerenciaRegional pageAtualizacaoGerenciaRegional = new PageAtualizacaoGerenciaRegional();
 	
 	/*
 	 * CRIAR TESTES PARA OBRIGATORIEDADE DOS CAMPOS
 	 */
 	
 	/*
-	 * CRIAR TESTES DE EXCLUSAO DE GERENCIA REGIONAL COM SUCESSO
+	 * TODO CRIAR TESTES DE EXCLUSAO DE GERENCIA REGIONAL COM SUCESSO
 	 */
 
 	@Test
-	public void incluirGerenciaRegionalComSucesso(){
-		nomeTeste = "incluirGerenciaRegionalComSucesso";
-		Log.msgInicioTeste(nomeTeste);
+	public void excluirGerenciaRegionalComSucesso(){
 		List<String> dadosGerenciaRegional = new ArrayList<String>();
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
@@ -43,49 +42,53 @@ public class TestGerenciaRegional_IT extends BaseTestCase {
 		dadosGerenciaRegional = pageInclusaoGerenciaRegional.incluirGerenciaRegional();
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.pesquisaUnitariaGerenciaRegional(dadosGerenciaRegional.get(0));
-		pageCadastrosGerenciasRegionais.validacaoUnitariaPesquisaGerenciaRegional(dadosGerenciaRegional.get(0), dadosGerenciaRegional.get(1));
-		Log.msgFimTeste(nomeTeste);
+		pageCadastrosGerenciasRegionais.navegarParaAtualizacaoGerenciaRegional();
+		pageAtualizacaoGerenciaRegional.excluirGerenciaRegionalComSucesso(dadosGerenciaRegional.get(0), dadosGerenciaRegional.get(1));
+		pageInicialSIC.navegarParaCadastroGerenciaRegional();
+		Log.info("Validando se gerencia nao eh exibida na listagem da pesquisa...");
+		pageCadastrosGerenciasRegionais.pesquisaUnitariaGerenciaRegional(dadosGerenciaRegional.get(0));
+		pageCadastrosGerenciasRegionais.validacaoUnitariaPesquisaGerenciaRegionalSemSucesso(dadosGerenciaRegional.get(0));
+	}
+	
+	@Test
+	public void incluirGerenciaRegionalComSucesso(){
+		List<String> dadosGerenciaRegional = new ArrayList<String>();
+		pageInicialSIC.navegarParaCadastroGerenciaRegional();
+		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
+		pageCadastrosGerenciasRegionais.navegarParaInclusaoNovaGerenciaRegional();
+		dadosGerenciaRegional = pageInclusaoGerenciaRegional.incluirGerenciaRegional();
+		pageInicialSIC.navegarParaCadastroGerenciaRegional();
+		pageCadastrosGerenciasRegionais.pesquisaUnitariaGerenciaRegional(dadosGerenciaRegional.get(0));
+		pageCadastrosGerenciasRegionais.validacaoUnitariaPesquisaGerenciaRegionalComSucesso(dadosGerenciaRegional.get(0), dadosGerenciaRegional.get(1));
 	}
 	
 	@Test
 	public void tentarIncluirEmMassaGerenciaRegionalComSiglaInvalidaNomeExistenteSemSucesso(){
-		nomeTeste = "tentarIncluirEmMassaGerenciaRegionalComSiglaInvalidaNomeExistenteSemSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
 		pageCadastrosGerenciasRegionais.navegarParaInclusaoNovaGerenciaRegional();
 		pageInclusaoGerenciaRegional.tentarIncluirGerenciaRegionalComSiglaInvalidaNomeExistente_EmMassa();
-		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
 	public void tentarIncluirEmMassaGerenciaRegionalComSiglaExistenteNomeInvalidoSemSucesso(){
-		nomeTeste = "tentarIncluirEmMassaGerenciaRegionalComSiglaExistenteNomeInvalidoSemSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
 		pageCadastrosGerenciasRegionais.navegarParaInclusaoNovaGerenciaRegional();
 		pageInclusaoGerenciaRegional.tentarIncluirGerenciaRegionalComSiglaExistenteNomeInvalido_EmMassa();
-		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
 	public void tentarIncluirEmMassaGerenciaRegionalComSigla_E_Nome_ExistentesSemSucesso(){
-		nomeTeste = "tentarIncluirEmMassaGerenciaRegionalComSigla_E_Nome_ExistentesSemSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
 		pageCadastrosGerenciasRegionais.navegarParaInclusaoNovaGerenciaRegional();
 		pageInclusaoGerenciaRegional.tentarIncluirGerenciaRegionalComSigla_E_NomeExistentes_EmMassa();
-		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
 	public void pesquisarGerenciaRegionalEmMassaComSucesso() {
-		nomeTeste = "pesquisarGerenciaRegionalEmMassaComSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.pesquisar_E_ValidarGerenciaRegionalEmMassa();
-		Log.msgFimTeste(nomeTeste);
 	}
 }

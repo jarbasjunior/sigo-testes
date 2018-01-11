@@ -20,7 +20,6 @@ import br.com.cagepa.sigo.util.Log;
  * */
 public class TestGerenciaRegional_IT extends BaseTestCase {
 
-	String         			        nomeTeste      				    = null;
 	PageInicialSIC 			        pageInicialSIC 				    = new PageInicialSIC();
 	PageInclusaoGerenciaRegional    pageInclusaoGerenciaRegional    = new PageInclusaoGerenciaRegional();   
 	PageCadastroGerenciasRegionais  pageCadastrosGerenciasRegionais = new PageCadastroGerenciasRegionais();
@@ -36,8 +35,6 @@ public class TestGerenciaRegional_IT extends BaseTestCase {
 
 	@Test
 	public void excluirGerenciaRegionalComSucesso(){
-		nomeTeste = "excluirGerenciaRegionalComSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		List<String> dadosGerenciaRegional = new ArrayList<String>();
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
@@ -51,13 +48,10 @@ public class TestGerenciaRegional_IT extends BaseTestCase {
 		Log.info("Validando se gerencia nao eh exibida na listagem da pesquisa...");
 		pageCadastrosGerenciasRegionais.pesquisaUnitariaGerenciaRegional(dadosGerenciaRegional.get(0));
 		pageCadastrosGerenciasRegionais.validacaoUnitariaPesquisaGerenciaRegionalSemSucesso(dadosGerenciaRegional.get(0));
-		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
 	public void incluirGerenciaRegionalComSucesso(){
-		nomeTeste = "incluirGerenciaRegionalComSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		List<String> dadosGerenciaRegional = new ArrayList<String>();
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
@@ -66,48 +60,35 @@ public class TestGerenciaRegional_IT extends BaseTestCase {
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.pesquisaUnitariaGerenciaRegional(dadosGerenciaRegional.get(0));
 		pageCadastrosGerenciasRegionais.validacaoUnitariaPesquisaGerenciaRegionalComSucesso(dadosGerenciaRegional.get(0), dadosGerenciaRegional.get(1));
-		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
 	public void tentarIncluirEmMassaGerenciaRegionalComSiglaInvalidaNomeExistenteSemSucesso(){
-		nomeTeste = "tentarIncluirEmMassaGerenciaRegionalComSiglaInvalidaNomeExistenteSemSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
 		pageCadastrosGerenciasRegionais.navegarParaInclusaoNovaGerenciaRegional();
 		pageInclusaoGerenciaRegional.tentarIncluirGerenciaRegionalComSiglaInvalidaNomeExistente_EmMassa();
-		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
 	public void tentarIncluirEmMassaGerenciaRegionalComSiglaExistenteNomeInvalidoSemSucesso(){
-		nomeTeste = "tentarIncluirEmMassaGerenciaRegionalComSiglaExistenteNomeInvalidoSemSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
 		pageCadastrosGerenciasRegionais.navegarParaInclusaoNovaGerenciaRegional();
 		pageInclusaoGerenciaRegional.tentarIncluirGerenciaRegionalComSiglaExistenteNomeInvalido_EmMassa();
-		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
 	public void tentarIncluirEmMassaGerenciaRegionalComSigla_E_Nome_ExistentesSemSucesso(){
-		nomeTeste = "tentarIncluirEmMassaGerenciaRegionalComSigla_E_Nome_ExistentesSemSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.validarFrameCadastroGerenciasRegionais();
 		pageCadastrosGerenciasRegionais.navegarParaInclusaoNovaGerenciaRegional();
 		pageInclusaoGerenciaRegional.tentarIncluirGerenciaRegionalComSigla_E_NomeExistentes_EmMassa();
-		Log.msgFimTeste(nomeTeste);
 	}
 	
 	@Test
 	public void pesquisarGerenciaRegionalEmMassaComSucesso() {
-		nomeTeste = "pesquisarGerenciaRegionalEmMassaComSucesso";
-		Log.msgInicioTeste(nomeTeste);
 		pageInicialSIC.navegarParaCadastroGerenciaRegional();
 		pageCadastrosGerenciasRegionais.pesquisar_E_ValidarGerenciaRegionalEmMassa();
-		Log.msgFimTeste(nomeTeste);
 	}
 }

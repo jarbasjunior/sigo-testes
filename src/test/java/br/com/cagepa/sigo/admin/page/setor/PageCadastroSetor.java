@@ -1,4 +1,4 @@
-package br.com.cagepa.sigo.admin.page.gerenciaregional;
+package br.com.cagepa.sigo.admin.page.setor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +15,10 @@ import br.com.cagepa.sigo.util.Log;
 import br.com.cagepa.sigo.util.Utils;
 import br.com.cagepa.sigo.util.XLS_Utils;
 
-public class PageCadastroGerenciasRegionais extends
-		PageObjectGeneric<PageCadastroGerenciasRegionais> {
+public class PageCadastroSetor extends
+		PageObjectGeneric<PageCadastroSetor> {
 
-	public PageCadastroGerenciasRegionais() {
+	public PageCadastroSetor() {
 		PageFactory.initElements(Selenium.getDriver(), this);
 	}
 

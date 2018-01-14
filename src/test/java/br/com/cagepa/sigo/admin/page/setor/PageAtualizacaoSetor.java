@@ -1,4 +1,4 @@
-package br.com.cagepa.sigo.admin.page.gerenciaregional;
+package br.com.cagepa.sigo.admin.page.setor;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,9 +11,9 @@ import br.com.cagepa.sigo.setup.Selenium;
 import br.com.cagepa.sigo.util.Log;
 import br.com.cagepa.sigo.util.Utils;
 
-public class PageAtualizacaoGerenciaRegional extends PageObjectGeneric<PageAtualizacaoGerenciaRegional> {
+public class PageAtualizacaoSetor extends PageObjectGeneric<PageAtualizacaoSetor> {
 
-	public PageAtualizacaoGerenciaRegional() {
+	public PageAtualizacaoSetor() {
 		PageFactory.initElements(Selenium.getDriver(), this);
 	}
 	

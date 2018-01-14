@@ -15,9 +15,9 @@ import br.com.cagepa.sigo.util.Log;
 import br.com.cagepa.sigo.util.Utils;
 import br.com.cagepa.sigo.util.XLS_Utils;
 
-public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusaoGerenciaRegional> {
+public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 
-	public PageInclusaoGerenciaRegional() {
+	public PageInclusaoSetor() {
 		PageFactory.initElements(Selenium.getDriver(), this);
 	}
 	

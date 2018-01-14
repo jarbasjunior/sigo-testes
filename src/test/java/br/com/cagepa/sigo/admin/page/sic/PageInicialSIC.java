@@ -34,30 +34,26 @@ public class PageInicialSIC extends PageObjectGeneric<PageInicialSIC> {
 	@FindBy(id = "item_1")
 	WebElement btGerenciaRegional;
 	
+	@FindBy(id = "item_2")
+	WebElement btSetor;
+	
 	public void navegarParaCadastroGerenciaRegional() {
-		clicarBotaoSIGO();
-		abrirDropDownCadastrosSIGO();
+		abrirCruds();
 		abrirAbaGerenciaRegional();
 	}
-	
-	public void clicarBotaoSIGO(){
-		Log.info("Clicando no botao SIGO...");
-		aguardarElementoVisivel(btSigo);
-		clickBotao(btSigo);
+	public void navegarParaCadastroSetor() {
+		abrirCruds();
+		abrirAbaSetor();
 	}
-	
-	public void abrirDropDownCadastrosSIGO(){
-		Log.info("Alterando frame...");
-		selecionarFrameNameOrID(Property.FRAME_ID_ABA_CADASTRO);
-		Log.info("Frame alterada para aba cadastros.");
-		Log.info("Abrindo dropdown cadastros...");
-		moverCursorPara(dropDownCadastros);
-	}
-	
 	public void abrirAbaGerenciaRegional(){
 		Log.info("Clicando no botao gerencia regional...");
 		moverCursorPara(btGerenciaRegional);
 		clickBotao(btGerenciaRegional);
+	}
+	public void abrirAbaSetor(){
+		Log.info("Clicando no botao setor...");
+		moverCursorPara(btSetor);
+		clickBotao(btSetor);
 	}
 	
 	public void verificaAutenticidadeUsuario(){
@@ -68,5 +64,21 @@ public class PageInicialSIC extends PageObjectGeneric<PageInicialSIC> {
 		Log.info("Verificando usuário de acesso...");
 		Utils.assertEquals(Property.EMAIL_USR, emailUsr.getText());
 	}
-
+	
+	public void abrirCruds(){
+		clicarBotaoSIGO();
+		abrirDropDownCadastrosSIGO();
+	}
+	public void clicarBotaoSIGO(){
+		Log.info("Clicando no botao SIGO...");
+		aguardarElementoVisivel(btSigo);
+		clickBotao(btSigo);
+	}
+	public void abrirDropDownCadastrosSIGO(){
+		Log.info("Alterando frame...");
+		selecionarFrameNameOrID(Property.FRAME_ID_ABA_CADASTRO);
+		Log.info("Frame alterada para aba cadastros.");
+		Log.info("Abrindo dropdown cadastros...");
+		moverCursorPara(dropDownCadastros);
+	}
 }

@@ -23,34 +23,40 @@ public class PageCadastroSetor extends
 	}
 
 	@FindBy(id = "quicksearchph_top")
-	WebElement enableFieldGerenciaRegional;
+	WebElement enableFieldSetor;
 
 	@FindBy(id = "SC_fast_search_top")
-	WebElement fieldGerenciaRegional;
+	WebElement fieldSetor;
 
 	@FindBy(id = "SC_fast_search_submit_top")
-	WebElement btLupaGerenciaRegional;
+	WebElement btLupaSetor;
 
 	@FindBy(id = "sc_btgp_btn_group_1_top")
 	WebElement btExportacao;
 
 	@FindBy(id = "sc_b_new_top")
-	WebElement btNovaGerencia;
+	WebElement btNovoSetor;
 
 	@FindBy(id = "brec_bot")
 	WebElement btIrPara;
 
 	@FindBy(id = "lin1_col1")
-	WebElement titleCadastroGerenciaRegional;
+	WebElement titleCadastroSetor;
 
 	@FindBy(id = "lin1_col2")
 	WebElement textoDataConsulta;
 
-	@FindBy(xpath = ".//*[@id='tit_sigo_gerencia_regional_grid__SCCS__1']/td[2]/a")
+	@FindBy(xpath = "//*[@id='tit_sigo_setor_grid__SCCS__1']/td[2]/a")
+	WebElement textoSiglaGRTabela;
+	
+	@FindBy(xpath = ".//*[@id='tit_sigo_setor_grid__SCCS__1']/td[3]/a")
 	WebElement textoSiglaTabela;
 
-	@FindBy(xpath = ".//*[@id='tit_sigo_gerencia_regional_grid__SCCS__1']/td[3]/a")
+	@FindBy(xpath = ".//*[@id='tit_sigo_setor_grid__SCCS__1']/td[4]/a")
 	WebElement textoNomeTabela;
+	
+	@FindBy(xpath = "//*[@id='tit_sigo_setor_grid__SCCS__1']/td[5]/a")
+	WebElement textoNomeAtuacao;
 
 	@FindBy(xpath = "//*[@id='sc_grid_toobar_bot']/table/tbody/tr/td[1]/span")
 	WebElement textoVisualizar;
@@ -62,12 +68,13 @@ public class PageCadastroSetor extends
 	WebElement textoNomeRetornoConsulta;
 	
 	@FindBy(id = "id_img_bedit")
-	WebElement btEditarCadastroRegional;
+	WebElement btEditarSetor;
 	
 	@FindBy(id = "sc_grid_body")
 	WebElement msgRegistroNaoEncontrado;
-
+	
 	By msgAguarde = By.xpath("html/body/div[5]/div/span/img");
+	
 
 	/*
 	 * ===============================================================================================
@@ -75,26 +82,26 @@ public class PageCadastroSetor extends
 	 *  
 	 */
 	
-	public void navegarParaInclusaoNovaGerenciaRegional(){
-		Log.info("Navegando para tela de inclusão de nova gerencia regional...");
-		clickBotao(btNovaGerencia);
+	public void navegarParaInclusaoNovoSetor(){
+		Log.info("Navegando para tela de inclusão de novo setor...");
+		click(btNovoSetor);
 	}
 	
-	public void navegarParaAtualizacaoGerenciaRegional(){
-		Log.info("Navegando para tela de atualizacao de gerencia regional...");
+	public void navegarParaAtualizacaoSetor(){
+		Log.info("Navegando para tela de atualizacao de setor...");
 		esperarElementoDesaparecer(msgAguarde, 10);
-		clickBotao(btEditarCadastroRegional);
+		click(btEditarSetor);
 		esperarElementoDesaparecer(msgAguarde, 10);
 	}
 
-	public void pesquisar_E_ValidarGerenciaRegionalEmMassa() {
+	public void pesquisar_E_ValidarSetorEmMassa() {
 		
 		try {
 			XLS_Utils.getArquivoExcel(Property.PLANILHA_GERENCIA_REGIONAL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		validarFrameCadastroGerenciasRegionais();
+		validarFrameCadastroSetor();
 
 		int    linha        = 0;
 		int    coluna       = 0;
@@ -114,9 +121,9 @@ public class PageCadastroSetor extends
 		do {
 			
 			Log.info("Habilitando campo de pesquisa...");
-			clickBotao(enableFieldGerenciaRegional);
+			click(enableFieldSetor);
 			Utils.wait(500);
-			aguardarElementoVisivel(fieldGerenciaRegional);
+			aguardarElementoVisivel(fieldSetor);
 			Log.info("Campo para pesquisa habilitado.");
 			Log.info("-------------------------------------------------------------------------------------");
 			Log.info("Pesquisando e validando registro ["+contador+"/"+qtdRegistros+"]...");
@@ -127,8 +134,8 @@ public class PageCadastroSetor extends
 				e.printStackTrace();
 			}
 			Log.info("Inserindo valor [" + valorCelula + "]...");
-			preencherCampo(fieldGerenciaRegional, valorCelula);
-			clickBotao(btLupaGerenciaRegional);
+			preencherCampo(fieldSetor, valorCelula);
+			click(btLupaSetor);
 			Log.info("Aguardando retorno da consulta...");
 			esperarElementoDesaparecer(msgAguarde, 15);
 			validarCamposDaPesquisa(camposDeValidacao(), linha, coluna); 
@@ -138,7 +145,7 @@ public class PageCadastroSetor extends
 		} while (registrosRestantes > 0);
 		
 		Log.info("Retornando para frame SIGO...");
-		retornarFrameAnterior();
+		retornarFramePai();
 		Log.info("Retornado para frame SIGO...");
 		XLS_Utils.fecharArquivoLeitura();
 	}
@@ -170,8 +177,8 @@ public class PageCadastroSetor extends
 	 * GUARDA TODOS ELEMENTOS DE VALIDAÇÃO DO RETORNO DA CONSULTA EM UMA LISTA
 	 */
 	public List<WebElement> camposDeValidacao() {
-		List<WebElement> elementos = new ArrayList<>();
-		elementos.add(titleCadastroGerenciaRegional);
+		List<WebElement> elementos = new ArrayList<WebElement>();
+		elementos.add(titleCadastroSetor);
 		elementos.add(textoSiglaTabela);
 		elementos.add(textoNomeTabela);
 		elementos.add(textoSiglaRetornoConsulta);
@@ -187,34 +194,34 @@ public class PageCadastroSetor extends
 	 *  MÉTODOS DE PESQUISA E VALIDAÇÃO UNITÁRIA DE GERENCIAS REGIONAIS
 	 *  
 	 */
-	public void pesquisaUnitariaGerenciaRegional(String sigla) {
-		validarFrameCadastroGerenciasRegionais();
+	public void pesquisaUnitariaSetor(String sigla) {
+		validarFrameCadastroSetor();
 		Log.info("Habilitando o campo de pesquisa...");
-		clickBotao(enableFieldGerenciaRegional);
+		click(enableFieldSetor);
 		Log.info("Campo de pesquisas habilitado.");
 		Utils.wait(1000);
-		aguardarElementoVisivel(fieldGerenciaRegional);
+		aguardarElementoVisivel(fieldSetor);
 		Log.info("Inserindo valor ["+sigla+"] no campo de pesquisa...");
-		preencherCampo(fieldGerenciaRegional, sigla);
-		clickBotao(btLupaGerenciaRegional);
+		preencherCampo(fieldSetor, sigla);
+		click(btLupaSetor);
 		Log.info("Aguardando retorno da pesquisa...");
 	}
 	
-	public void pesquisaUnitariaGerenciaRegionalSemSucesso(String sigla) {
-		validarFrameCadastroGerenciasRegionais();
-		clickBotao(enableFieldGerenciaRegional);
+	public void pesquisaUnitariaSetorSemSucesso(String sigla) {
+		validarFrameCadastroSetor();
+		click(enableFieldSetor);
 		Utils.wait(1000);
-		aguardarElementoVisivel(fieldGerenciaRegional);
+		aguardarElementoVisivel(fieldSetor);
 		Log.info("Inserindo valor ["+sigla+"] no campo de pesquisa...");
-		preencherCampo(fieldGerenciaRegional, sigla);
-		clickBotao(btLupaGerenciaRegional);
+		preencherCampo(fieldSetor, sigla);
+		click(btLupaSetor);
 		Log.info("Aguardando retorno da pesquisa...");
 	}
 
-	public void validacaoUnitariaPesquisaGerenciaRegionalComSucesso(String sigla, String nome) {
+	public void validacaoUnitariaPesquisaSetorComSucesso(String sigla, String nome) {
 		esperarElementoDesaparecer(msgAguarde, 15);
-		Log.info("Validando nome da gerencia regional...");
-		Utils.assertEquals(titleCadastroGerenciaRegional.getText(),	"Cadastro de Gerências Regionais");
+		Log.info("Validando nome do seetor...");
+		Utils.assertEquals(titleCadastroSetor.getText(),	"Cadastro de Setores");
 		Log.info("Validando data da consulta...");
 		Utils.assertEquals(textoDataConsulta.getText(), Utils.getDataAtual());
 		Log.info("Validando nome [Sigla] na tabela...");
@@ -225,16 +232,16 @@ public class PageCadastroSetor extends
 		Utils.assertEquals(textoSiglaRetornoConsulta.getText(), sigla);
 		Log.info("Validando nome do retorno da consulta...");
 		Utils.assertEquals(textoNomeRetornoConsulta.getText(), nome);
-		retornarFrameAnterior();
+		retornarFramePai();
 	}
 	
-	public void validacaoUnitariaPesquisaGerenciaRegionalSemSucesso(String sigla) {
+	public void validacaoUnitariaPesquisaSetorSemSucesso(String sigla) {
 		esperarElementoDesaparecer(msgAguarde, 15);
-		Utils.assertEquals(titleCadastroGerenciaRegional.getText(),	"Cadastro de Gerências Regionais");
+		Utils.assertEquals(titleCadastroSetor.getText(),	"Cadastro de Setores");
 		Utils.assertEquals(textoDataConsulta.getText(), Utils.getDataAtual());
 		Log.info("Validando mensagem de registro nao encontrado...");
 		Utils.assertEquals(msgRegistroNaoEncontrado.getText(), "Registros não encontrados");
-		retornarFrameAnterior();
+		retornarFramePai();
 	}
 
 	/*
@@ -243,26 +250,28 @@ public class PageCadastroSetor extends
 	 */
 
 	/*
-	 * MÉTODO PARA VALIDAR CAMPOS DA FRAME DE CADASTRO DE REGIONAL
+	 * MÉTODO PARA VALIDAR CAMPOS DA FRAME DE CADASTRO DE SETOR
 	 */
-	public void validarFrameCadastroGerenciasRegionais() {
+	public void validarFrameCadastroSetor() {
 		Log.info("Alterando frame...");
-		selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER);
-		clickBotao(titleCadastroGerenciaRegional);
-		Log.info("Frame alterada para aba Manter Gerencia Regional.");
-		Log.info("Validando frame de cadastro de Gerencia regional.");
+		selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER_SETOR);
+		click(titleCadastroSetor);
+		Log.info("Frame alterada para aba Manter Setor.");
+		Log.info("Validando frame de cadastro de Setores.");
 		Log.info("Validando titulo...");
-		Utils.assertEquals(titleCadastroGerenciaRegional.getText(),
-				"Cadastro de Gerências Regionais");
+		Utils.assertEquals(titleCadastroSetor.getText(),
+				"Cadastro de Setores");
 		Log.info("Validando data...");
 		Utils.assertEquals(textoDataConsulta.getText(), Utils.getDataAtual());
 		Log.info("Validando nomes de botoes...");
 		Utils.assertEquals(btExportacao.getText(), "  Exportação  ");
-		Utils.assertEquals(btNovaGerencia.getText(), "Nova Gerência");
+		Utils.assertEquals(btNovoSetor.getText(), "Novo Setor");
 		Utils.assertEquals(btIrPara.getText(), "Ir para");
 		Log.info("Validando nomes...");
+		Utils.assertEquals(textoSiglaGRTabela.getText(), "Sigla GR");
 		Utils.assertEquals(textoSiglaTabela.getText(), "Sigla");
 		Utils.assertEquals(textoNomeTabela.getText(), "Nome");
+		Utils.assertEquals(textoNomeAtuacao.getText(), "Atuação");
 		Utils.assertEquals(textoVisualizar.getText(), "Visualizar");
 	}
 }

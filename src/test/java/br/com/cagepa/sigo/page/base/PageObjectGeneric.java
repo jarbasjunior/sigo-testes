@@ -2,18 +2,24 @@ package br.com.cagepa.sigo.page.base;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.common.base.Function;
+
+import br.com.cagepa.sigo.admin.page.sic.PageInicialSIC;
 import br.com.cagepa.sigo.setup.Property;
 import br.com.cagepa.sigo.setup.Selenium;
 import br.com.cagepa.sigo.util.Log;
@@ -21,9 +27,16 @@ import br.com.cagepa.sigo.util.Utils;
 
 public abstract class PageObjectGeneric<T> {
 
-	private static final String URL_HUETECH = Property.URL;
-	private static final int LOAD_TIMEOUT = 5;
+	private static final PageLoginSIC pageLogin = new PageLoginSIC(); 
+	private static final PageInicialSIC pageSIC = new PageInicialSIC();
+	private static final String URL_SIC               = Property.URL;
+	private static final int    LOAD_TIMEOUT          = 30;
+	private static final int    INTERVALO_VERIFICACAO = 1;
 	private String windowHandleJanelaInicial;
+	private static final Wait<WebDriver> wait = new FluentWait<WebDriver>(Selenium.getDriver())
+				    								.withTimeout( LOAD_TIMEOUT         , TimeUnit.SECONDS) // Tempo limite (segundos)
+				    								.pollingEvery(INTERVALO_VERIFICACAO, TimeUnit.SECONDS) // Intervalo de tempo de cada busca (segundos) 
+				    								.ignoring(NoSuchElementException.class);  
 
 	public PageObjectGeneric() {
 		PageFactory.initElements(Selenium.getDriver(), this);
@@ -31,7 +44,7 @@ public abstract class PageObjectGeneric<T> {
 
 	public T abrirPagina(Class<T> clazz) {
 		T pagina = PageFactory.initElements(Selenium.getDriver(), clazz);
-		Selenium.getDriver().navigate().to(URL_HUETECH);
+		Selenium.getDriver().navigate().to(URL_SIC);
 		return pagina;
 	}
 
@@ -40,18 +53,47 @@ public abstract class PageObjectGeneric<T> {
 			element.clear();
 			element.sendKeys(value);
 		} catch (WebDriverException e) {
-			Log.erro("["+element+"] não encontrado, valor ["+value+"] não pode ser preenchido.");
-			Assert.fail("["+element+"] não encontrado, valor ["+value+"] não pode ser preenchido.");
+			erroPreenchimento(element, value);
 		}
 	}
 	
-	public void clickBotao(WebElement element) {
+	public void aguardarElementoVisivel(WebElement element) {
+		try {
+			final WebElement e = element;
+			wait.until(new Function<WebDriver, WebElement>() {
+				public WebElement apply(WebDriver driver) {
+					return e;
+				}
+			});
+			WebDriverWait driverWait = new WebDriverWait(Selenium.getDriver(),
+			LOAD_TIMEOUT);
+			driverWait.until(ExpectedConditions.visibilityOf(element));
+		} catch (Exception e) {
+			erroEspera(element);
+		}
+	}
+	
+	public void waitAndClick(WebElement element) {
+		try {
+			final WebElement e = element;
+			WebElement elementoAguardado = wait.until(new Function<WebDriver, WebElement>() {
+			       public WebElement apply(WebDriver driver) {
+			              return e;
+			             }
+			       });
+			click(elementoAguardado);
+			
+		} catch (WebDriverException e) {
+			erroClick(element);
+		}
+	}
+	
+	public void click(WebElement element) {
 		try {
 			aguardarElementoVisivel(element);
 			element.click();
 		} catch (WebDriverException e) {
-			Log.erro("Erro ao clicar no elemento ["+element+"].");
-			Assert.fail("Erro ao clicar no elemento ["+element+"].");
+			erroClick(element);
 		}
 	}
 
@@ -59,75 +101,20 @@ public abstract class PageObjectGeneric<T> {
 		try {
 			return element.getAttribute("value");
 		} catch (Exception e) {
-			Log.erro("Erro ao buscar valor de atributo do elemento ["+element+"].");
-			Assert.fail("Erro ao buscar valor de atributo do elemento ["+element+"].");
+			erroGetValorAtributo(element);
 			return null;
 		}
 	}
 
-	public void selectElementByVisibleText(WebElement element, String textVisible) {
-		try {
-			new Select(element).selectByVisibleText(textVisible);
-		} catch (WebDriverException e) {
-			Log.erro("["+element+"] do combobox não encontrado, valor ["+textVisible+"] não pode ser selecionado.");
-			Assert.fail("["+element+"] do combobox não encontrado, valor ["+textVisible+"] não pode ser selecionado.");
-		}
-	}
-
-	public void selectElementByVisibleValue(WebElement element, String valueVisible) {
-		try {
-			new Select(element).selectByValue(valueVisible);
-		} catch (WebDriverException e) {
-			Log.erro("["+element+"] do combobox não encontrado, valor ["+valueVisible+"] não pode ser selecionado.");
-			Assert.fail("["+element+"] do combobox não encontrado, valor ["+valueVisible+"] não pode ser selecionado.");
-		}
-	}
-
-	public void acceptAlert() {
+	public void confirmarAlerta() {
 		try {
 			Alert alert = Selenium.getDriver().switchTo().alert();
 			alert.accept();
 		} catch (Exception e) {
-			Log.erro("Erro ao realizar a confirmacao do Alerta");
-			Assert.fail("Erro ao realizar a confirmacao do Alerta");
+			erroConfirmaAlerta();
 		}
 	}
 
-	public String getAlert() {
-		String alerta = "";
-		try {
-			Alert alert = Selenium.getDriver().switchTo().alert();
-			alerta = alert.getText();
-		} catch (Exception e) {
-			Log.erro("Erro ao realizar a confirmacao do Alerta");
-			Assert.fail("Erro ao realizar a confirmacao do Alerta");
-		}
-		return alerta;
-	}
-
-	public void aguardarElementoVisivel(WebElement element) {
-		try {
-			WebDriverWait driverWait = new WebDriverWait(Selenium.getDriver(),
-					LOAD_TIMEOUT);
-			driverWait.until(ExpectedConditions.visibilityOf(element));
-		} catch (Exception e) {
-			Log.erro("Tempo excedido para aguardar elemento: " + element);
-			Assert.fail("Tempo excedido para aguardar elemento: " + element);
-		}
-	}
-
-	public void aguardarElementoVisivelComTexto(WebElement element, String text) {
-		try {
-			WebDriverWait driverWait = new WebDriverWait(Selenium.getDriver(),
-					LOAD_TIMEOUT);
-			driverWait.until(ExpectedConditions.textToBePresentInElement(
-					element, text));
-		} catch (Exception e) {
-			Log.erro("Tempo excedido para aguardar elemento: " + element);
-			Assert.fail("Tempo excedido para aguardar elemento: " + element);
-		}
-	}
-	
 	public void esperarElementoDesaparecer(By elemento, int qtdSegundos){
 		try {
 			int segundosEspera      = 0;
@@ -146,14 +133,6 @@ public abstract class PageObjectGeneric<T> {
 		} catch (Exception e) {
 			Log.info("Erro");
 			Assert.fail("Error!");
-		}
-	}
-
-	public boolean isVisibility(WebElement elemento) {
-		try {
-			return elemento.isDisplayed();
-		} catch (NoSuchElementException e) {
-			return false;
 		}
 	}
 
@@ -179,6 +158,7 @@ public abstract class PageObjectGeneric<T> {
 
 	public void moverCursorPara(WebElement elemento) {
 		Actions action = new Actions(Selenium.getDriver());
+		aguardarElementoVisivel(elemento);
 		action.moveToElement(elemento).build().perform();
 	}
 	
@@ -191,9 +171,6 @@ public abstract class PageObjectGeneric<T> {
 		Selenium.getDriver().navigate().back();
 	}
 
-	/**
-	 * Seta para nova janela aberta
-	 */
 	public void alternarJanela() {
 		windowHandleJanelaInicial = Selenium.getDriver().getWindowHandle();
 		Set<String> windowHandles = Selenium.getDriver().getWindowHandles();
@@ -204,6 +181,10 @@ public abstract class PageObjectGeneric<T> {
 		}
 		setWindowHandleJanelaInicial(windowHandleJanelaInicial);
 	}
+	
+	public void retonarJanelaOriginal() {
+		Selenium.getDriver().switchTo().window(getWindowHandleJanelaInicial());
+	}
 
 	public String getWindowHandleJanelaInicial() {
 		return windowHandleJanelaInicial;
@@ -213,11 +194,6 @@ public abstract class PageObjectGeneric<T> {
 		this.windowHandleJanelaInicial = windowHandleJanelaInicial;
 	}
 
-	public void confirmarAlerta() {
-		Alert alert = Selenium.getDriver().switchTo().alert();
-		alert.accept();
-	}
-	
 	public void selecionarFrameID(int idFrame) {
 		Selenium.getDriver().switchTo().frame(idFrame);
 	}
@@ -230,21 +206,59 @@ public abstract class PageObjectGeneric<T> {
 		Selenium.getDriver().switchTo().frame(element);
 	}
 	
-	public void retornarFrameAnterior() {
+	public void retornarFramePai() {
 		Log.info("Retornando para frame SIGO...");
 		Selenium.getDriver().switchTo().defaultContent();
-		Log.info("Retornado para frame SIGO...");
+		Log.info("Driver na frame SIGO...");
 	}
 
-	/**
-	 * 
-	 * @return Janela anterior
-	 */
-	public void retonarJanelaOriginal() {
-		Selenium.getDriver().switchTo().window(getWindowHandleJanelaInicial());
-	}
 
 	public WebElement getElement(By by) {
 		return Selenium.getDriver().findElement(by);
+	}
+	
+	public void erroPreenchimento(WebElement element, String value) {
+		erro();
+		Log.erro("["+element+"] não encontrado, valor ["+value+"] não pode ser preenchido.");
+		pageSIC.sairDoSistema();
+		pageLogin.driveNaPaginaLogin();
+		Assert.fail("["+element+"] não encontrado, valor ["+value+"] não pode ser preenchido.");
+		
+	}
+	
+	public void erroEspera(WebElement element) {
+		erro();
+		Log.erro("Tempo excedido para aguardar elemento: " + element);
+		pageSIC.sairDoSistema();
+		pageLogin.driveNaPaginaLogin();
+		Assert.fail("Tempo excedido para aguardar elemento: " + element);
+	}
+	
+	public void erroClick(WebElement element) {
+		erro();
+		Log.erro("Erro ao clicar no elemento ["+element+"].");
+		pageSIC.sairDoSistema();
+		pageLogin.driveNaPaginaLogin();
+		Assert.fail("Erro ao clicar no elemento ["+element+"].");
+	}
+	
+	public void erroGetValorAtributo(WebElement element) {
+		erro();
+		Log.erro("Erro ao buscar valor de atributo do elemento ["+element+"].");
+		pageSIC.sairDoSistema();
+		pageLogin.driveNaPaginaLogin();
+		Assert.fail("Erro ao buscar valor de atributo do elemento ["+element+"].");
+	}
+	
+	public void erroConfirmaAlerta() {
+		erro();
+		Log.erro("Erro ao realizar a confirmacao do Alerta");
+		pageSIC.sairDoSistema();
+		pageLogin.driveNaPaginaLogin();
+		Assert.fail("Erro ao realizar a confirmacao do Alerta");
+	}
+	
+	public void erro() {
+		Log.erro("E R R O ...");
 	}
 }

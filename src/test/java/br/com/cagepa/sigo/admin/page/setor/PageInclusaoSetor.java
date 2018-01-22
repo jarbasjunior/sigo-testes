@@ -22,10 +22,10 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 	}
 	
 	@FindBy(id = "lin1_col1")
-	WebElement titleInclusaoGerenciaRegional;
+	WebElement titleInclusaoSetor;
 	
 	@FindBy(id = "lin1_col2")
-	WebElement dataInclusaoGerenciaRegional;
+	WebElement dataInclusaoSetor;
 	
 	@FindBy(id = "sc_b_ins_t")
 	WebElement btIncluir;
@@ -33,11 +33,38 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 	@FindBy(id = "sc_b_sai_t")
 	WebElement btCancelar;
 	
+	@FindBy(id = "id_label_codigoid_gerencia_regional")
+	WebElement nomeGerenciaRegional;
+	
 	@FindBy(id = "id_label_sigla")
 	WebElement sigla;
 	
 	@FindBy(id = "id_label_nome")
 	WebElement nome;
+	
+	@FindBy(id = "id_sc_field_atuacao")
+	WebElement comboAtuacao;
+
+	@FindBy(xpath = "//*[@id='idAjaxSelect_atuacao']/select/option[@value='A']")
+	WebElement atuacaoAgua;
+	
+	@FindBy(xpath = "//*[@id='idAjaxSelect_atuacao']/select/option[@value='E']")
+	WebElement atuacaoEsgoto;
+	
+	@FindBy(xpath = "//*[@id='idAjaxSelect_atuacao']/select/option[@value='AE']")
+	WebElement atuacaoAguaEsgoto;
+	
+	@FindBy(id = "id_label_area")
+	WebElement area;
+
+	@FindBy(id = "id_sc_field_area")
+	WebElement fieldArea;
+	
+	@FindBy(id = "id_read_off_area")
+	WebElement enableFieldArea;
+	
+	@FindBy(id = "id_label_sistemas_atendidos")
+	WebElement sistemasAtendidos;
 	
 	@FindBy(id = "id_sc_field_sigla")
 	WebElement fieldSigla;
@@ -68,49 +95,71 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 	
 	@FindBy(xpath = ".//*[@id='id_error_display_fixed']/table/tbody/tr[1]/td[2]/table/tbody/tr/td[2]/a")
 	WebElement btFecharMsgAlerta;
+	
+	@FindBy(id = "id_sc_field_codigoid_gerencia_regional")
+	WebElement comboGerenciaRegional;
 
-	public List<String> incluirGerenciaRegional(){
-		List<String> dadosGerenciaRegional = new ArrayList<String>();
-		String siglaGerencia = Utils.geraSigla(4);
-		String nomeGerencia  = "Teste Gerencia Regional "+siglaGerencia;
-		dadosGerenciaRegional.add(siglaGerencia);
-		dadosGerenciaRegional.add(nomeGerencia);
-		validarFrameInclusaoGerenciaRegional();
+	public List<String> incluirSetor(String gerencia){
+		WebElement opcaoGerencia = Selenium.getDriver().findElement(By.xpath("//*[@id='idAjaxSelect_codigoid_gerencia_regional']/select/option[contains(.,'"+gerencia+"')]"));
+		List<String> dadosSetor = new ArrayList<String>();
+		String siglaSetor = Utils.geraSigla(4);
+		String nomeSetor  = "Teste Setor "+siglaSetor;
+		String nomeArea   = "Teste Área Setor "+nomeSetor;
+		dadosSetor.add(siglaSetor);
+		dadosSetor.add(nomeSetor);
+		validarFrameInclusaoSetor();
 		
-		Log.info("Iniciando preenchimento de inclusão de gerência regional...");
+		Log.info("Iniciando preenchimento de inclusao de setor...");
+		Log.info("Informando gerencia regional...");
+		click(comboGerenciaRegional);
+		aguardarElementoVisivel(opcaoGerencia);
+		click(opcaoGerencia);
+		click(comboGerenciaRegional);
 		Log.info("Habilitando campo sigla...");
-		clickBotao(enablefieldSigla);
+		click(enablefieldSigla);
 		Log.info("Campo sigla habilitado.");
 		aguardarElementoVisivel(fieldSigla);
-		Log.info("Preenchendo campo sigla com valor["+siglaGerencia+"]...");
-		preencherCampo(fieldSigla, siglaGerencia);
+		Log.info("Preenchendo campo sigla com valor["+siglaSetor+"]...");
+		preencherCampo(fieldSigla, siglaSetor);
 		Log.info("Campo [Sigla] preenchido.");
 			
 		Log.info("Habilitando campo nome...");
-		clickBotao(enablefieldNome);
+		click(enablefieldNome);
 		Log.info("Campo [Nome] habilitado.");
 		aguardarElementoVisivel(fieldNome);
-		Log.info("Preenchendo campo [Nome] com valor ["+nomeGerencia+"]...");
-		preencherCampo(fieldNome, nomeGerencia);
+		Log.info("Preenchendo campo [Nome] com valor ["+nomeSetor+"]...");
+		preencherCampo(fieldNome, nomeSetor);
 		Log.info("Campo [Nome] preenchido.");
-			
+		Log.info("Preenchendo atuação.");
+		click(comboAtuacao);
+		aguardarElementoVisivel(atuacaoAguaEsgoto);
+		click(atuacaoAguaEsgoto);
+		click(comboAtuacao);
+		Log.info("Habilitando campo área...");
+		click(enablefieldSigla);
+		Log.info("Campo área habilitado.");
+		aguardarElementoVisivel(fieldSigla);
+		Log.info("Preenchendo campo área com valor["+nomeArea+"]...");
+		preencherCampo(fieldArea, nomeArea);
+		Log.info("Campo [Área] preenchido.");
+		
 		Log.info("Clicando no botao incluir...");
-		clickBotao(btIncluir);
+		click(btIncluir);
 		
 		Log.info("Confirmando pop-up de inclusao...");
 		confirmarAlerta();
 			
-		Log.info("Verificando inclusao da ["+nomeGerencia+"]...");
+		Log.info("Verificando inclusao do setor: ["+nomeSetor+"]...");
 		Log.info("Validando mensagem feedback de sucesso...");
-		Utils.assertEquals(msgFeedbackSucesso.getText(), "Gerência Regional cadastrada com sucesso!");
+		Utils.assertEquals(msgFeedbackSucesso.getText(), "Setor cadastrado com sucesso!");
 			
 		Log.info("Confirmando mensagem de sucesso...");
-		clickBotao(btOk);
-		retornarFrameAnterior();
-		return dadosGerenciaRegional;
+		click(btOk);
+		retornarFramePai();
+		return dadosSetor;
 	}
-	public void tentarIncluirGerenciaRegionalComSigla_E_NomeExistentes_EmMassa(){
-		validarFrameInclusaoGerenciaRegional();
+	public void tentarIncluirSetorComSigla_E_NomeExistentesEmMassa(){
+		validarFrameInclusaoSetor();
 		
 		try {
 			XLS_Utils.getArquivoExcel(Property.PLANILHA_GERENCIA_REGIONAL);
@@ -152,7 +201,7 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Log.info("Iniciando preenchimento de inclusão de gerência regional...");
 			
 			Log.info("Habilitando campo sigla...");
-			clickBotao(enablefieldSigla);
+			click(enablefieldSigla);
 			Log.info("Campo sigla habilitado.");
 			aguardarElementoVisivel(fieldSigla);
 			Log.info("Preenchendo campo sigla com valor ["+siglaGerencia+"]...");
@@ -160,7 +209,7 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Log.info("Campo [Sigla] preenchido.");
 			
 			Log.info("Habilitando campo nome...");
-			clickBotao(enablefieldNome);
+			click(enablefieldNome);
 			Log.info("Campo [Nome] habilitado.");
 			aguardarElementoVisivel(fieldNome);
 			Log.info("Preenchendo campo [Nome] com valor ["+nomeGerencia+"]...");
@@ -168,7 +217,7 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Log.info("Campo [Nome] preenchido.");
 			
 			Log.info("Clicando no botao incluir...");
-			clickBotao(btIncluir);
+			click(btIncluir);
 			
 			Log.info("Confirmando pop-up de inclusao...");
 			confirmarAlerta();
@@ -178,18 +227,18 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Utils.assertEquals(msgFeedbackErro.getText(), "Erro na inclusão - O registro já existe: Sigla\nErro na inclusão - O registro já existe: Nome");
 			
 			Log.info("Fechando mensagem de alerta...");
-			clickBotao(btFecharMsgAlerta);
+			click(btFecharMsgAlerta);
 			
 			linha++;
 			contador++;
 			registrosRestantes--;
 			
 		} while (registrosRestantes > 0);
-		retornarFrameAnterior();
+		retornarFramePai();
 	}
 	
-	public void tentarIncluirGerenciaRegionalComSiglaExistenteNomeInvalido_EmMassa(){
-		validarFrameInclusaoGerenciaRegional();
+	public void tentarIncluirSetorComSiglaExistenteNomeInvalidoEmMassa(){
+		validarFrameInclusaoSetor();
 		
 		try {
 			XLS_Utils.getArquivoExcel(Property.PLANILHA_GERENCIA_REGIONAL);
@@ -225,7 +274,7 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Log.info("Iniciando preenchimento de inclusão de gerência regional...");
 			
 			Log.info("Habilitando campo sigla...");
-			clickBotao(enablefieldSigla);
+			click(enablefieldSigla);
 			Log.info("Campo sigla habilitado.");
 			aguardarElementoVisivel(fieldSigla);
 			Log.info("Preenchendo campo sigla com valor ["+siglaGerencia+"]...");
@@ -233,7 +282,7 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Log.info("Campo [Sigla] preenchido.");
 			
 			Log.info("Habilitando campo nome...");
-			clickBotao(enablefieldNome);
+			click(enablefieldNome);
 			Log.info("Campo [Nome] habilitado.");
 			aguardarElementoVisivel(fieldNome);
 			Log.info("Preenchendo campo [Nome] com valor [I N V A L I D O]...");
@@ -241,7 +290,7 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Log.info("Campo [Nome] preenchido.");
 			
 			Log.info("Clicando no botao incluir...");
-			clickBotao(btIncluir);
+			click(btIncluir);
 			
 			Log.info("Confirmando pop-up de inclusao...");
 			confirmarAlerta();
@@ -251,18 +300,18 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Utils.assertEquals(msgFeedbackErro.getText(), "Erro na inclusão - O registro já existe: Sigla");
 			
 			Log.info("Fechando mensagem de alerta...");
-			clickBotao(btFecharMsgAlerta);
+			click(btFecharMsgAlerta);
 			
 			linha++;
 			contador++;
 			registrosRestantes--;
 			
 		} while (registrosRestantes > 0);
-		retornarFrameAnterior();
+		retornarFramePai();
 	}
 	
 	public void tentarIncluirGerenciaRegionalComSiglaInvalidaNomeExistente_EmMassa(){
-		validarFrameInclusaoGerenciaRegional();
+		validarFrameInclusaoSetor();
 		
 		try {
 			XLS_Utils.getArquivoExcel(Property.PLANILHA_GERENCIA_REGIONAL);
@@ -298,7 +347,7 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Log.info("Iniciando preenchimento de inclusão de gerência regional...");
 			
 			Log.info("Habilitando campo sigla...");
-			clickBotao(enablefieldSigla);
+			click(enablefieldSigla);
 			Log.info("Campo sigla habilitado.");
 			aguardarElementoVisivel(fieldSigla);
 			Log.info("Preenchendo campo sigla com valor [INVA]...");
@@ -306,7 +355,7 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Log.info("Campo [Sigla] preenchido.");
 			
 			Log.info("Habilitando campo nome...");
-			clickBotao(enablefieldNome);
+			click(enablefieldNome);
 			Log.info("Campo [Nome] habilitado.");
 			aguardarElementoVisivel(fieldNome);
 			Log.info("Preenchendo campo [Nome] com valor ["+nomeGerencia+"]...");
@@ -314,7 +363,7 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Log.info("Campo [Nome] preenchido.");
 			
 			Log.info("Clicando no botao incluir...");
-			clickBotao(btIncluir);
+			click(btIncluir);
 			
 			Log.info("Confirmando pop-up de inclusao...");
 			confirmarAlerta();
@@ -324,34 +373,38 @@ public class PageInclusaoSetor extends PageObjectGeneric<PageInclusaoSetor> {
 			Utils.assertEquals(msgFeedbackErro.getText(), "Erro na inclusão - O registro já existe: Nome");
 			
 			Log.info("Fechando mensagem de alerta...");
-			clickBotao(btFecharMsgAlerta);
+			click(btFecharMsgAlerta);
 			
 			linha++;
 			contador++;
 			registrosRestantes--;
 			
 		} while (registrosRestantes > 0);
-		retornarFrameAnterior();
+		retornarFramePai();
 	}
-		
-	public void validarFrameInclusaoGerenciaRegional(){
-		By frameGerenciaRegional = By.name(Property.FRAME_NAME_ABA_MANTER);
-		if (isVisibility(frameGerenciaRegional)) {
+	
+	public void validarFrameInclusaoSetor(){
+		By frameSetor = By.name(Property.FRAME_NAME_ABA_MANTER_SETOR);
+		if (isVisibility(frameSetor)) {
 			Log.info("Alterando frame...");
-			selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER);
+			selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER_SETOR);
 			Log.info("Frame alterada para aba manter.");
 		}
-		Log.info("Validando frame de inclusao de gerencia regional.");
+		Log.info("Validando frame de inclusao de setor.");
 		Log.info("Validando titulo...");
-		Utils.assertEquals(titleInclusaoGerenciaRegional.getText(), "Inclusão - Gerência Regional");
+		Utils.assertEquals(titleInclusaoSetor.getText(), "Inclusão - Setor");
 		Log.info("Validando data...");
-		Utils.assertEquals(dataInclusaoGerenciaRegional.getText() , Utils.getDataAtual());
+		Utils.assertEquals(dataInclusaoSetor.getText() , Utils.getDataAtual());
 		Log.info("Validando nomes de botoes...");
 		Utils.assertEquals(btIncluir.getText() , "Incluir");
 		Utils.assertEquals(btCancelar.getText(), "Cancelar");
 		Log.info("Validando nomes...");
+		Utils.assertEquals(nomeGerenciaRegional.getText(), "Gerência Regional");     
 		Utils.assertEquals(sigla.getText()               , "Sigla");
 		Utils.assertEquals(nome.getText()                , "Nome");
+		Utils.assertEquals(comboAtuacao.getText()             , "Atuação");
+		Utils.assertEquals(area.getText()                , "Área");
+		Utils.assertEquals(sistemasAtendidos.getText()   , "Sistemas Atendidos");
 		Utils.assertEquals(fraseObrigatoriedade.getText(), "* Campo de preenchimento obrigatório");
 	}
 }

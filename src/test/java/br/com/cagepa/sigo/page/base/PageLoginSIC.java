@@ -36,14 +36,21 @@ public class PageLoginSIC extends PageObjectGeneric<PageLoginSIC> {
 		Log.info("Informando senha...");
 		aguardarElementoVisivel(fieldPassword);
 		preencherCampo(fieldPassword, Property.PASSWORD);
-		clickBotao(btLogin);
+		waitAndClick(btLogin);
 		
 		if (isVisibility(msgAlertaLogin)) {
 			Log.info("Confirmando alerta de login...");
 			aguardarElementoVisivel(btAlertOk);
 			selecionarFrameID(0);
-			clickBotao(btAlertOk);
+			waitAndClick(btAlertOk);
 			Log.info("Login confirmado...");
+			retornarFramePai();
 		}
+	}
+	
+	public void driveNaPaginaLogin() {
+		Log.info("Retornando para página de login...");
+		aguardarElementoVisivel(fieldUsr);
+		Log.info("Página de login carregada.");
 	}
 }

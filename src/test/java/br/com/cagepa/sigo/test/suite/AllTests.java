@@ -36,9 +36,8 @@ protected static WebDriver driver;
 	public static void beforeClass() throws Exception {
 		inicio = Calendar.getInstance().getTime();
 		isAllTestsExecution = true;
-		driver = Selenium.getDriver();
-		driver.manage().window();
-		driver.navigate().to(Property.URL);
+		Selenium.getDriver().navigate().to(Property.URL);
+		Selenium.getDriver().manage().window().maximize();
 		TestLoginSIC_IT testLogin = new TestLoginSIC_IT();
 		testLogin.loginSIC_ComSucesso();
 	}

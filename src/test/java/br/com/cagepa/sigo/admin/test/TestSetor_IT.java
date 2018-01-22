@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-import br.com.cagepa.sigo.admin.page.gerenciaregional.PageAtualizacaoSetor;
-import br.com.cagepa.sigo.admin.page.gerenciaregional.PageCadastroSetor;
-import br.com.cagepa.sigo.admin.page.gerenciaregional.PageInclusaoSetor;
+import br.com.cagepa.sigo.admin.page.gerenciaregional.PageCadastroGerenciaRegional;
+import br.com.cagepa.sigo.admin.page.gerenciaregional.PageInclusaoGerenciaRegional;
+import br.com.cagepa.sigo.admin.page.setor.PageAtualizacaoSetor;
+import br.com.cagepa.sigo.admin.page.setor.PageCadastroSetor;
+import br.com.cagepa.sigo.admin.page.setor.PageInclusaoSetor;
 import br.com.cagepa.sigo.admin.page.sic.PageInicialSIC;
 import br.com.cagepa.sigo.test.base.BaseTestCase;
 
@@ -19,22 +21,39 @@ import br.com.cagepa.sigo.test.base.BaseTestCase;
  * */
 public class TestSetor_IT extends BaseTestCase {
 
-	PageInicialSIC 		 pageInicialSIC		= new PageInicialSIC();
-	PageInclusaoSetor    pageInclusaoSetor    = new PageInclusaoSetor();   
-	PageCadastroSetor    pageCadastrosSetor   = new PageCadastroSetor();
-	PageAtualizacaoSetor pageAtualizacaoSetor = new PageAtualizacaoSetor();
-	
-	/*
-	 * CRIAR TESTES PARA OBRIGATORIEDADE DOS CAMPOS
-	 */
+	PageInicialSIC 		 		 pageInicialSIC		  		  = new PageInicialSIC();
+	PageInclusaoSetor    		 pageInclusaoSetor    		  = new PageInclusaoSetor();   
+	PageCadastroSetor    		 pageCadastrosSetor   		  = new PageCadastroSetor();
+	PageAtualizacaoSetor         pageAtualizacaoSetor 		  = new PageAtualizacaoSetor();
+	PageCadastroGerenciaRegional pageCadastroGerenciaRegional = new PageCadastroGerenciaRegional();
+	PageInclusaoGerenciaRegional pageInclusaoGerenciaRegional = new PageInclusaoGerenciaRegional();
 	
 	@Test
 	public void incluirSetorComSucesso(){
+		/*
+		 * Incluindo gerencia regional
+		 */
+		List<String> dadosGerenciaRegional = new ArrayList<String>();
+		pageInicialSIC.navegarParaCadastroGerenciaRegional();
+		pageCadastroGerenciaRegional.validarFrameCadastroGerenciasRegionais();
+		pageCadastroGerenciaRegional.navegarParaInclusaoNovaGerenciaRegional();
+		dadosGerenciaRegional = pageInclusaoGerenciaRegional.incluirGerenciaRegional();
+		pageInicialSIC.navegarParaCadastroGerenciaRegional();
+		pageCadastroGerenciaRegional.pesquisaUnitariaGerenciaRegional(dadosGerenciaRegional.get(0));
+		pageCadastroGerenciaRegional.validacaoUnitariaPesquisaGerenciaRegionalComSucesso(dadosGerenciaRegional.get(0), dadosGerenciaRegional.get(1));
+		String nomeCompletoGerencia = dadosGerenciaRegional.get(0) +" - "+ dadosGerenciaRegional.get(1);
+		/*
+		 * Incluindo sistemas
+		 */
+		
+		/*
+		 * Incluindo setor
+		 */
 		List<String> dadosSetor = new ArrayList<String>();
 		pageInicialSIC.navegarParaCadastroSetor();
 		pageCadastrosSetor.validarFrameCadastroSetor();
 		pageCadastrosSetor.navegarParaInclusaoNovoSetor();
-		dadosSetor = pageInclusaoSetor.incluirGerenciaRegional();
+		dadosSetor = pageInclusaoSetor.incluirSetor(nomeCompletoGerencia);
 		pageInicialSIC.navegarParaCadastroSetor();
 		pageCadastrosSetor.pesquisaUnitariaSetor(dadosSetor.get(0));
 		pageCadastrosSetor.validacaoUnitariaPesquisaSetorComSucesso(dadosSetor.get(0), dadosSetor.get(1));

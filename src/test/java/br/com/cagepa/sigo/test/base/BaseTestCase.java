@@ -8,6 +8,7 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 
+import br.com.cagepa.sigo.setup.Browser;
 import br.com.cagepa.sigo.setup.Property;
 import br.com.cagepa.sigo.setup.Selenium;
 import br.com.cagepa.sigo.test.suite.AllTests;
@@ -33,11 +34,10 @@ public class BaseTestCase {
 	@BeforeClass
 	public static void beforeClass(){
 		if(!AllTests.isAllTestsExecution){
-			driver = Selenium.getDriver();
-			driver.navigate().to(Property.URL);
-//			driver.manage().window().maximize();
-			TestLoginSIC_IT	testLoginSIC_IT	= new TestLoginSIC_IT();
-			testLoginSIC_IT.loginSIC_ComSucesso();
+			Selenium.getDriver().navigate().to(Property.URL);
+			if (Property.BROWSER_NAME.equals(Browser.FIREFOX)) {
+				Selenium.getDriver().manage().window().maximize();
+			}
 		}
 	}
 	

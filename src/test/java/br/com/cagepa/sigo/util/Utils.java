@@ -1,5 +1,9 @@
 package br.com.cagepa.sigo.util;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -11,17 +15,11 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Random;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import javax.imageio.ImageIO;
 
-import br.com.cagepa.sigo.setup.Selenium;
+import org.junit.Assert;
+
+import br.com.cagepa.sigo.setup.Property;
 
 /**
  * Classe com m�todos de apoio, que otimizam a codifica��o das classes de
@@ -32,34 +30,7 @@ import br.com.cagepa.sigo.setup.Selenium;
  */
 public abstract class Utils {
 
-	private static final   WebDriverWait wait;
-	private static final   WebDriver     driver;
 	private static boolean               isError = false;
-
-	static {
-		driver = Selenium.getDriver();
-		wait = new WebDriverWait(driver, 10);
-	}
-
-	public static void isVisible(By locator) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-	}
-
-	public static void isVisible(String id) {
-		isVisible(By.id(id));
-	}
-
-	public static void isLocated(By locator) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-	}
-
-	public static void isLocated(String id) {
-		isLocated(By.id(id));
-	}
-
-	public static void isClickable(WebElement element) {
-		wait.until(ExpectedConditions.elementToBeClickable(element));
-	}
 
 	public static void wait(final int iTimeInMillis) {
 		try {
@@ -151,12 +122,24 @@ public abstract class Utils {
 	}
 	
 	public static void takeScreenshot(String fileName){
-		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		Date data = new Date();
-	    try {
-			FileUtils.copyFile(scrFile, 
-					new File("C:\\Users\\Jarbas Junior\\Git-jarbas\\sigo-testes\\evidencias\\"+fileName+ data.getTime()+".jpeg"),true);
-		} catch (IOException e) {
+		
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd hh mm ss a");
+    	Calendar now = Calendar.getInstance();
+        Robot robot;
+		try {
+			robot = new Robot();
+         	BufferedImage screenShot = robot.createScreenCapture(new java.awt.Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+         	try {
+				ImageIO.write(screenShot, "JPG", new File(Property.EVIDENCIAS_TESTE_PATH+fileName+ data.getTime()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+         	System.out.println(formatter.format(now.getTime()));
+				
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

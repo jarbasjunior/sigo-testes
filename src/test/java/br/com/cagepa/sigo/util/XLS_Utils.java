@@ -38,7 +38,7 @@ public class XLS_Utils {
 			Log.erro("["+ARQUIVO_TESTE+"] Diretorio nao encontrado!", e);
 		}
 		
-		// Define a planilha do arqruivo que será utilizada no teste
+		// Define a planilha do arquivo que será utilizada no teste
 		try {
 			planilha = excelWBook.getSheet(nomePlanilha);
 			Log.info("Planilha utilizada para teste -> ["+nomePlanilha+"]");
@@ -98,7 +98,7 @@ public class XLS_Utils {
     }
     
     // Grava os registro no arquivo excel
-    public static void gravaRegistrosExcel(int numeroRegistro, String planilha, List<String> dados) throws Exception{
+   /* public static void gravaRegistrosExcel(int numeroRegistro, String planilha, List<String> dados) throws Exception{
     	int qtdColunas = 0;
     	
     	switch (planilha) {
@@ -109,7 +109,6 @@ public class XLS_Utils {
 		default:
 			break;
 		}
-    	
     	for (int linha = numeroRegistro; linha == numeroRegistro; linha++) {
 
 			for (int coluna = 0; coluna < qtdColunas; coluna++) {
@@ -122,7 +121,7 @@ public class XLS_Utils {
 				}
 			}
     	}
-    }
+    }*/
     
     //Realiza a leitura da célula
     public static String getDadosCelula(int numeroLinha, int numeroColuna) throws Exception{
@@ -155,6 +154,5 @@ public class XLS_Utils {
 			qtdRegistros++;
 		}
 		return qtdRegistros;
-    	
     }
 }

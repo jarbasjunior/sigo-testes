@@ -51,17 +51,17 @@ public class PageAtualizacaoGerenciaRegional extends PageObjectGeneric<PageAtual
 		Utils.assertEquals(fieldSigla.getAttribute("value") , sigla);
 		Utils.assertEquals(fieldNome.getAttribute("value") , nome);
 		Log.info("Excluindo gerencia regional ["+nome+"]...");
-		clickBotao(btExcluir);
-		Log.info("Confirmando exclusao...");
+		waitAndClick(btExcluir);
 		confirmarAlerta();
-		retornarFrameAnterior();
+		Log.info("E X C L U S A O - C O N F I R M A D A");
+		retornarFramePai();
 	}
 	
 	public void validarFrameInclusaoGerenciaRegional(){
-		By frameGerenciaRegional = By.name(Property.FRAME_NAME_ABA_MANTER);
+		By frameGerenciaRegional = By.name(Property.FRAME_NAME_ABA_MANTER_GERENCIA_REGIONAL);
 		if (isVisibility(frameGerenciaRegional)) {
 			Log.info("Alterando frame...");
-			selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER);
+			selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER_GERENCIA_REGIONAL);
 			Log.info("Frame alterada para aba manter.");
 		}
 		Log.info("Validando frame de atualizacao de gerencia regional.");

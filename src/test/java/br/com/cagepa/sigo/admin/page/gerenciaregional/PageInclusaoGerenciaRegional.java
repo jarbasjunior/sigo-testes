@@ -79,7 +79,7 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 		
 		Log.info("Iniciando preenchimento de inclusão de gerência regional...");
 		Log.info("Habilitando campo sigla...");
-		clickBotao(enablefieldSigla);
+		waitAndClick(enablefieldSigla);
 		Log.info("Campo sigla habilitado.");
 		aguardarElementoVisivel(fieldSigla);
 		Log.info("Preenchendo campo sigla com valor["+siglaGerencia+"]...");
@@ -87,7 +87,7 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 		Log.info("Campo [Sigla] preenchido.");
 			
 		Log.info("Habilitando campo nome...");
-		clickBotao(enablefieldNome);
+		waitAndClick(enablefieldNome);
 		Log.info("Campo [Nome] habilitado.");
 		aguardarElementoVisivel(fieldNome);
 		Log.info("Preenchendo campo [Nome] com valor ["+nomeGerencia+"]...");
@@ -95,18 +95,21 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 		Log.info("Campo [Nome] preenchido.");
 			
 		Log.info("Clicando no botao incluir...");
-		clickBotao(btIncluir);
+		waitAndClick(btIncluir);
 		
 		Log.info("Confirmando pop-up de inclusao...");
 		confirmarAlerta();
 			
 		Log.info("Verificando inclusao da ["+nomeGerencia+"]...");
 		Log.info("Validando mensagem feedback de sucesso...");
+		aguardarElementoVisivel(msgFeedbackSucesso);
 		Utils.assertEquals(msgFeedbackSucesso.getText(), "Gerência Regional cadastrada com sucesso!");
 			
 		Log.info("Confirmando mensagem de sucesso...");
-		clickBotao(btOk);
-		retornarFrameAnterior();
+		aguardarElementoVisivel(btOk);
+		Log.info("Mensagem de sucesso confirmada...");
+		waitAndClick(btOk);
+		retornarFramePai();
 		return dadosGerenciaRegional;
 	}
 	public void tentarIncluirGerenciaRegionalComSigla_E_NomeExistentes_EmMassa(){
@@ -152,7 +155,7 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 			Log.info("Iniciando preenchimento de inclusão de gerência regional...");
 			
 			Log.info("Habilitando campo sigla...");
-			clickBotao(enablefieldSigla);
+			waitAndClick(enablefieldSigla);
 			Log.info("Campo sigla habilitado.");
 			aguardarElementoVisivel(fieldSigla);
 			Log.info("Preenchendo campo sigla com valor ["+siglaGerencia+"]...");
@@ -160,7 +163,7 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 			Log.info("Campo [Sigla] preenchido.");
 			
 			Log.info("Habilitando campo nome...");
-			clickBotao(enablefieldNome);
+			waitAndClick(enablefieldNome);
 			Log.info("Campo [Nome] habilitado.");
 			aguardarElementoVisivel(fieldNome);
 			Log.info("Preenchendo campo [Nome] com valor ["+nomeGerencia+"]...");
@@ -168,24 +171,27 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 			Log.info("Campo [Nome] preenchido.");
 			
 			Log.info("Clicando no botao incluir...");
-			clickBotao(btIncluir);
+			waitAndClick(btIncluir);
 			
 			Log.info("Confirmando pop-up de inclusao...");
 			confirmarAlerta();
 			
 			Log.info("Verificando tentativa de inclusao de gerencia regional ja existente...");
+			aguardarElementoVisivel(btIncluir);
+			aguardarElementoVisivel(msgFeedbackErro);
 			Log.info("Validando mensagem de feedback de critica na sigla e no nome da gerencia regional ja existente...");
 			Utils.assertEquals(msgFeedbackErro.getText(), "Erro na inclusão - O registro já existe: Sigla\nErro na inclusão - O registro já existe: Nome");
 			
+			aguardarElementoVisivel(btFecharMsgAlerta);
 			Log.info("Fechando mensagem de alerta...");
-			clickBotao(btFecharMsgAlerta);
+			waitAndClick(btFecharMsgAlerta);
 			
 			linha++;
 			contador++;
 			registrosRestantes--;
 			
 		} while (registrosRestantes > 0);
-		retornarFrameAnterior();
+		retornarFramePai();
 	}
 	
 	public void tentarIncluirGerenciaRegionalComSiglaExistenteNomeInvalido_EmMassa(){
@@ -225,7 +231,7 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 			Log.info("Iniciando preenchimento de inclusão de gerência regional...");
 			
 			Log.info("Habilitando campo sigla...");
-			clickBotao(enablefieldSigla);
+			waitAndClick(enablefieldSigla);
 			Log.info("Campo sigla habilitado.");
 			aguardarElementoVisivel(fieldSigla);
 			Log.info("Preenchendo campo sigla com valor ["+siglaGerencia+"]...");
@@ -233,7 +239,7 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 			Log.info("Campo [Sigla] preenchido.");
 			
 			Log.info("Habilitando campo nome...");
-			clickBotao(enablefieldNome);
+			waitAndClick(enablefieldNome);
 			Log.info("Campo [Nome] habilitado.");
 			aguardarElementoVisivel(fieldNome);
 			Log.info("Preenchendo campo [Nome] com valor [I N V A L I D O]...");
@@ -241,24 +247,27 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 			Log.info("Campo [Nome] preenchido.");
 			
 			Log.info("Clicando no botao incluir...");
-			clickBotao(btIncluir);
+			waitAndClick(btIncluir);
 			
 			Log.info("Confirmando pop-up de inclusao...");
 			confirmarAlerta();
 			
 			Log.info("Verificando tentativa de inclusao de gerencia regional ja existente...");
 			Log.info("Validando mensagem de feedback de critica na SIGLA da gerencia regional ja existente...");
+			aguardarElementoVisivel(msgFeedbackErro);
 			Utils.assertEquals(msgFeedbackErro.getText(), "Erro na inclusão - O registro já existe: Sigla");
 			
 			Log.info("Fechando mensagem de alerta...");
-			clickBotao(btFecharMsgAlerta);
+			aguardarElementoVisivel(btFecharMsgAlerta);
+			waitAndClick(btFecharMsgAlerta);
+			Log.info("Mensagem de alerta fechada...");
 			
 			linha++;
 			contador++;
 			registrosRestantes--;
 			
 		} while (registrosRestantes > 0);
-		retornarFrameAnterior();
+		retornarFramePai();
 	}
 	
 	public void tentarIncluirGerenciaRegionalComSiglaInvalidaNomeExistente_EmMassa(){
@@ -298,7 +307,7 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 			Log.info("Iniciando preenchimento de inclusão de gerência regional...");
 			
 			Log.info("Habilitando campo sigla...");
-			clickBotao(enablefieldSigla);
+			waitAndClick(enablefieldSigla);
 			Log.info("Campo sigla habilitado.");
 			aguardarElementoVisivel(fieldSigla);
 			Log.info("Preenchendo campo sigla com valor [INVA]...");
@@ -306,7 +315,7 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 			Log.info("Campo [Sigla] preenchido.");
 			
 			Log.info("Habilitando campo nome...");
-			clickBotao(enablefieldNome);
+			waitAndClick(enablefieldNome);
 			Log.info("Campo [Nome] habilitado.");
 			aguardarElementoVisivel(fieldNome);
 			Log.info("Preenchendo campo [Nome] com valor ["+nomeGerencia+"]...");
@@ -314,33 +323,36 @@ public class PageInclusaoGerenciaRegional extends PageObjectGeneric<PageInclusao
 			Log.info("Campo [Nome] preenchido.");
 			
 			Log.info("Clicando no botao incluir...");
-			clickBotao(btIncluir);
+			waitAndClick(btIncluir);
 			
 			Log.info("Confirmando pop-up de inclusao...");
 			confirmarAlerta();
 			
 			Log.info("Verificando tentativa de inclusao de gerencia regional ja existente...");
+			aguardarElementoVisivel(msgFeedbackErro);
 			Log.info("Validando mensagem de feedback de critica no NOME da gerencia regional ja existente...");
 			Utils.assertEquals(msgFeedbackErro.getText(), "Erro na inclusão - O registro já existe: Nome");
 			
+			aguardarElementoVisivel(btFecharMsgAlerta);
 			Log.info("Fechando mensagem de alerta...");
-			clickBotao(btFecharMsgAlerta);
+			waitAndClick(btFecharMsgAlerta);
 			
 			linha++;
 			contador++;
 			registrosRestantes--;
 			
 		} while (registrosRestantes > 0);
-		retornarFrameAnterior();
+		retornarFramePai();
 	}
 		
 	public void validarFrameInclusaoGerenciaRegional(){
-		By frameGerenciaRegional = By.name(Property.FRAME_NAME_ABA_MANTER);
+		By frameGerenciaRegional = By.name(Property.FRAME_NAME_ABA_MANTER_GERENCIA_REGIONAL);
 		if (isVisibility(frameGerenciaRegional)) {
 			Log.info("Alterando frame...");
-			selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER);
+			selecionarFrameNameOrID(Property.FRAME_NAME_ABA_MANTER_GERENCIA_REGIONAL);
 			Log.info("Frame alterada para aba manter.");
 		}
+		aguardarElementoVisivel(titleInclusaoGerenciaRegional);
 		Log.info("Validando frame de inclusao de gerencia regional.");
 		Log.info("Validando titulo...");
 		Utils.assertEquals(titleInclusaoGerenciaRegional.getText(), "Inclusão - Gerência Regional");

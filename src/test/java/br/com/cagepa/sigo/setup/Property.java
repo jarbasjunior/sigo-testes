@@ -22,6 +22,7 @@ public abstract class Property {
 	public static final String IE64_DRIVE_PATH;
 	public static final String CHROME_DRIVE_PATH;
 	public static final String FIREFOX_DRIVE_PATH;
+	public static final String EVIDENCIAS_TESTE_PATH;
 	public static final String PHANTOM_JS_DRIVE_PATH;
 
 	/*
@@ -38,10 +39,16 @@ public abstract class Property {
 	/*
 	 * IDENTIFICAÇÕES DOS FRAMES DO SISTEMA
 	 */
-	public static final String FRAME_ID_ABA_MANTER;
-	public static final String FRAME_NAME_ABA_MANTER;
-	public static final String FRAME_ID_ABA_CADASTRO;
-	public static final String FRAME_NAME_ABA_CADASTRO;
+	public static final String FRAME_ID_ABA_INICIAL;
+	public static final String FRAME_NAME_ABA_INICIAL;
+	public static final String FRAME_ID_ABA_MANTER_CADASTRO;
+	public static final String FRAME_NAME_ABA_MANTER_CADASTRO;
+	public static final String FRAME_ID_ABA_MANTER_SETOR;
+	public static final String FRAME_NAME_ABA_MANTER_SETOR;
+	public static final String FRAME_ID_ABA_MANTER_SISTEMA;
+	public static final String FRAME_NAME_ABA_MANTER_SISTEMA;
+	public static final String FRAME_ID_ABA_MANTER_GERENCIA_REGIONAL;
+	public static final String FRAME_NAME_ABA_MANTER_GERENCIA_REGIONAL;
 	
 	/*
 	 * IDENTIFICAÇÕES DE DADOS EM COMUM DAS TELAS DE CADASTRO
@@ -113,8 +120,9 @@ public abstract class Property {
 		
 		IE64_DRIVE_PATH                          = new File("").getAbsolutePath() + "\\src\\test\\resources\\drivers\\IEDriverServer.exe";
 		CHROME_DRIVE_PATH                        = new File("").getAbsolutePath() + "\\src\\test\\resources\\drivers\\chromedriver.exe";
+		FIREFOX_DRIVE_PATH                       = new File("").getAbsolutePath() + "\\src\\test\\resources\\drivers\\geckodriver.exe";
+		EVIDENCIAS_TESTE_PATH                    = new File("").getAbsolutePath() + "\\src\\test\\resources\\evidencias\\";
 		PHANTOM_JS_DRIVE_PATH                    = new File("").getAbsolutePath() + "\\src\\test\\resources\\drivers\\phantomjs.exe";
-		FIREFOX_DRIVE_PATH                       = new File("").getAbsolutePath() + "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe";
 		URL                                      = get("site.address");
 		USR                                      = get("usr");
 		LOGIN                                    = get("login");
@@ -128,10 +136,16 @@ public abstract class Property {
 		PLANILHA_SERVICO                         = get("planilha.servico");
 		PLANILHA_GERENCIA_REGIONAL               = get("planilha.gerencia.regional");
 		PLANILHA_UNIDADE_OPERACIONAL             = get("planilha.unidade.operacional");
-		FRAME_ID_ABA_MANTER                      = get("frame.id.aba.manter");
-		FRAME_NAME_ABA_MANTER                    = get("frame.name.aba.manter");
-		FRAME_ID_ABA_CADASTRO                    = get("frame.id.aba.cadastro");
-		FRAME_NAME_ABA_CADASTRO                  = get("frame.name.aba.cadastro");
+		FRAME_ID_ABA_MANTER_SETOR                = get("frame.id.aba.setor");
+		FRAME_NAME_ABA_MANTER_SETOR				 = get("frame.name.aba.setor");
+		FRAME_ID_ABA_MANTER_SISTEMA				 = get("frame.id.aba.sistema");
+		FRAME_NAME_ABA_MANTER_SISTEMA			 = get("frame.name.aba.sistema");
+		FRAME_ID_ABA_MANTER_GERENCIA_REGIONAL    = get("frame.id.aba.gerencia.regional");
+		FRAME_NAME_ABA_MANTER_GERENCIA_REGIONAL  = get("frame.name.aba.gerencia.regional");
+		FRAME_ID_ABA_MANTER_CADASTRO             = get("frame.id.aba.cadastro");
+		FRAME_NAME_ABA_MANTER_CADASTRO           = get("frame.name.aba.cadastro");
+		FRAME_ID_ABA_INICIAL          			 = get("frame.id.aba.inicial");
+		FRAME_NAME_ABA_INICIAL		             = get("frame.name.aba.inicial");
 		TELA_NOME                                = get("tela.nome");
 		TELA_SIGLA                               = get("tela.sigla");
 		TELA_ATUACAO                             = get("tela.atuacao");
